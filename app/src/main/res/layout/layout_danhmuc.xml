@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:filterTouchesWhenObscured="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:paddingLeft="24dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#B6E2D3"
+            android:text="Danh Mục"
+            android:textSize="24dp"
+            android:fontFamily="@font/cabin_medium"
+            android:textStyle="normal"
+            android:textColor="#305FAF"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thời trang nam"
+            android:fontFamily="@font/cabin_medium"
+            android:textSize="20dp"/>
+
+        <GridLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="238dp"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thời trang nữ"
+            android:fontFamily="@font/cabin_medium"
+            android:textSize="20dp"/>
+
+        <GridLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="238dp"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giày dép và phụ kiện"
+            android:fontFamily="@font/cabin_medium"
+            android:textSize="20dp"/>
+
+        <GridLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="238dp"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

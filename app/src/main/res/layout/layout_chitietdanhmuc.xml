@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#B6E2D3"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_back"/>
+
+        <TextView
+            android:layout_weight="7.5"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên danh mục"
+            android:textSize="24dp"
+            android:fontFamily="@font/cabin_medium"
+            android:textStyle="normal"
+            android:textColor="#A45C40"/>
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/shopping_bag_solid"/>
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/search_3_line"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5AEBD"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/idTabLayOut"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5AEBD"/>
+
+</LinearLayout>

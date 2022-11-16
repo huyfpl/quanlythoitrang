@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="user_Name">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/user_name</item>
+        <item name="android:fontFamily">@font/asap_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

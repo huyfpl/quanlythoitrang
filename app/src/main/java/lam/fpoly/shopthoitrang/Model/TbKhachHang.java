@@ -15,8 +15,8 @@ public class TbKhachHang {
         this.ten_khachHang = tenKH;
         this.sdt_khachHang = SDT;
         this.diaChi = diaChi;
-        userName = user;
-        userPass = pass;
+        this.userName = user;
+        this.userPass = pass;
     }
 
     public int getId_khachHang() {

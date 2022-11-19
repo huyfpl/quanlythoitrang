@@ -1,70 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.DanhMuc_Fragment">
+    android:orientation="vertical"
+    tools:context=".MainActivity"
 
-    <!-- TODO: Update blank fragment layout -->
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B6E2D3"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
 
-        <LinearLayout
+
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rsv"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:background="#B6E2D3"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:weightSum="10">
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/rcv_aniamtion" />
 
-            <TextView
-                android:layout_weight="7.5"
-                android:layout_marginLeft="20dp"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Danh mục"
-                android:textSize="24dp"
-                android:fontFamily="@font/cabin_medium"
-                android:textStyle="normal"
-                android:textColor="#A45C40"/>
+        <TextView
+            android:id="@+id/soluong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="số lượng"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:layout_weight="0.5"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/shopping_bag_solid"/>
-
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.5"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/search_3_line"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#A5AEBD"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/idTabDanhMuc"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#A5AEBD"/>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager_DanhMuc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:lottie_autoPlay="true"
+            app:lottie_repeatMode="restart"
+            />
     </LinearLayout>
-</FrameLayout>
+
+
+</LinearLayout>

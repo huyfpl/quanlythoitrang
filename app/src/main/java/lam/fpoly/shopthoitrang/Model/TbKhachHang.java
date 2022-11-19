@@ -1,10 +1,10 @@
 package lam.fpoly.shopthoitrang.Model;
 
 public class TbKhachHang {
-    int id_KhachHang;
-    String tenKH;
-    String SDT;
-    String DiaChi;
+    int id_khachHang;
+    String ten_khachHang;
+    String sdt_khachHang;
+    String diaChi;
     String userName;
     String userPass;
 
@@ -12,43 +12,51 @@ public class TbKhachHang {
     }
 
     public TbKhachHang(String tenKH, String SDT, String diaChi, String user, String pass) {
-        this.tenKH = tenKH;
-        this.SDT = SDT;
-        DiaChi = diaChi;
+        this.ten_khachHang = tenKH;
+        this.sdt_khachHang = SDT;
+        this.diaChi = diaChi;
         userName = user;
         userPass = pass;
     }
 
-    public int getId_KhachHang() {
-        return id_KhachHang;
+    public TbKhachHang(int id_khachHang,String ten_khachHang, String sdt_khachHang, String diaChi, String userName) {
+        this.ten_khachHang = ten_khachHang;
+        this.sdt_khachHang = sdt_khachHang;
+        this.diaChi = diaChi;
+        this.userName = userName;
+        this.id_khachHang = id_khachHang;
     }
 
-    public void setId_KhachHang(int id_KhachHang) {
-        this.id_KhachHang = id_KhachHang;
+    public int getId_khachHang() {
+        return id_khachHang;
     }
 
-    public String getTenKH() {
-        return tenKH;
+    public void setId_khachHang(int id_khachHang) {
+        this.id_khachHang = id_khachHang;
     }
 
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
+    public String getTen_khachHang() {
+        return ten_khachHang;
     }
 
-    public String getSDT() {
-        return SDT;
+    public void setTen_khachHang(String ten_khachHang) {
+        this.ten_khachHang = ten_khachHang;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public String getSdt_khachHang() {
+        return sdt_khachHang;
+    }
+
+    public void setSdt_khachHang(String sdt_khachHang) {
+        this.sdt_khachHang = sdt_khachHang;
     }
 
     public String getDiaChi() {
-        return DiaChi;
+        return diaChi;
     }
 
     public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
+        this.diaChi = diaChi;
     }
 
     public String getUserName() {

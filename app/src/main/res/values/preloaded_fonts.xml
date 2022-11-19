@@ -3,6 +3,8 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/arbutus_slab</item>
         <item>@font/asap_bold</item>
+        <item>@font/cabin</item>
+        <item>@font/cabin_bold</item>
         <item>@font/cabin_medium</item>
     </array>
 </resources>

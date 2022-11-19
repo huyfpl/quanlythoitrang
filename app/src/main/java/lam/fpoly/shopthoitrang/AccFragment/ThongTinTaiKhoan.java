@@ -2,7 +2,6 @@ package lam.fpoly.shopthoitrang.AccFragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,14 +16,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
+import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
 public class ThongTinTaiKhoan extends AppCompatActivity {
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
     LinearLayout user_edit;
-    TbSanPhamDao spDao;
+    TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
     int id;
@@ -38,7 +37,7 @@ public class ThongTinTaiKhoan extends AppCompatActivity {
         user_sdt = findViewById(R.id.user_sdt);
         user_diachi = findViewById(R.id.user_diachi);
         user_edit = findViewById(R.id.user_edit);
-        spDao = new TbSanPhamDao();
+        khDao = new TbKhachHangDao();
         context = this;
 
         id = DangNhapActivity.ID;
@@ -86,7 +85,7 @@ public class ThongTinTaiKhoan extends AppCompatActivity {
                 kh.setSdt_khachHang(user_sdt_edit.getText().toString());
                 kh.setDiaChi(user_diachi_edit.getText().toString());
                 kh.setUserName(user_dangnhap_edit.getText().toString());
-                spDao.updateRow(kh);
+                khDao.updateRow(kh);
                 setData();
                 dialog.dismiss();
             }
@@ -101,7 +100,7 @@ public class ThongTinTaiKhoan extends AppCompatActivity {
         dialog.show();
     }
     private void setData(){
-        TbSanPhamDao spDao = new TbSanPhamDao();
+        TbKhachHangDao spDao = new TbKhachHangDao();
         kh = spDao.getUser(id);
         user_ten.setText(kh.getTen_khachHang());
         user_tendangnhap.setText(kh.getUserName());

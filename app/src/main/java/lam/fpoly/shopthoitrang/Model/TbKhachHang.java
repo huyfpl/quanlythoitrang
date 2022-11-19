@@ -19,14 +19,6 @@ public class TbKhachHang {
         userPass = pass;
     }
 
-    public TbKhachHang(int id_khachHang,String ten_khachHang, String sdt_khachHang, String diaChi, String userName) {
-        this.ten_khachHang = ten_khachHang;
-        this.sdt_khachHang = sdt_khachHang;
-        this.diaChi = diaChi;
-        this.userName = userName;
-        this.id_khachHang = id_khachHang;
-    }
-
     public int getId_khachHang() {
         return id_khachHang;
     }

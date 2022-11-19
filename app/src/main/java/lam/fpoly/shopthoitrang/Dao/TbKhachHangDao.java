@@ -85,4 +85,45 @@ public class TbKhachHangDao {
         } catch (Exception e) {
         }
     }
+
+    public TbKhachHang getUser(int id){
+        List<TbKhachHang> listKH = new ArrayList<>();
+        try {
+            if (this.objConn != null) {
+                String sqlQuery = "SELECT * FROM KhachHang WHERE id_khachHang = "+id+"";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    TbKhachHang obj = new TbKhachHang();
+                    obj.setId_khachHang(resultSet.getInt("id_khachHang"));
+                    obj.setTen_khachHang(resultSet.getString("ten_khachHang"));
+                    obj.setSdt_khachHang(resultSet.getString("sdt_khachHang"));
+                    obj.setDiaChi(resultSet.getString("diaChi"));
+                    obj.setUserName(resultSet.getString("userName"));
+                    obj.setUserPass(resultSet.getString("userPass"));
+                    listKH.add(obj);
+                }
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "getAll: lỗi");
+        }
+        return  listKH.get(0);
+    }
+
+    public void updateRow(TbKhachHang obj){
+        try {
+            if (this.objConn != null) {
+                String sqlUpdate = "UPDATE khachHang SET ten_khachHang = N'"+obj.getTen_khachHang()+"', " +
+                        "sdt_khachHang = '"+obj.getSdt_khachHang()+"', " +
+                        "diaChi = N'"+obj.getDiaChi()+"', " +
+                        "userName = '"+obj.getUserName()+"',     " +
+                        "userPass = '"+obj.getUserPass()+"' " +
+                        "WHERE id_khachHang = "+obj.getId_khachHang()+"";
+                PreparedStatement stmt = this.objConn.prepareStatement(sqlUpdate);
+                stmt.execute(); // thực thi câu lệnh SQL
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "updateRow: lỗi");
+        }
+    }
 }

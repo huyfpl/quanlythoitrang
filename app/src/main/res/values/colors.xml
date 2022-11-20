@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="user_name">#A5AEBD</color>
     <color name="address">#1E355C</color>
+    <color name="pink">#E8B4B8</color>
+    <color name="datroi">#19ABED</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="gray">#979797</color>
+    <color name="red">#E62517</color>
 </resources>

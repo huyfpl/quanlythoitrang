@@ -1,6 +1,7 @@
 package lam.fpoly.shopthoitrang.AccFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class DangNhapActivity extends AppCompatActivity {
     Context context;
     List<TbKhachHang> list;
     TbKhachHangDao tbKhachHangDao;
+    public static int ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class DangNhapActivity extends AppCompatActivity {
                 for (TbKhachHang tbKhachHang : list) {
                     if (userName.equals(tbKhachHang.getUserName())){
                         check = true;
+                        ID = tbKhachHangDao.getID(userName);
                         break;
                     }
                 }
@@ -70,7 +73,8 @@ public class DangNhapActivity extends AppCompatActivity {
                                 builder.show();
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                finish();
+                                Intent intent = new Intent(context,ThongTinTaiKhoan.class);
+                                startActivity(intent);
                             }
                         }
                     }

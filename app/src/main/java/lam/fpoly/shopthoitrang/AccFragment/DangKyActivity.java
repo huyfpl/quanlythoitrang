@@ -34,7 +34,7 @@ public class DangKyActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(DangKyActivity.this,DangNhapActivity.class);
+                Intent i = new Intent(DangKyActivity.this,DangNhapActivity.class);
                 startActivity(i);
             }
         });

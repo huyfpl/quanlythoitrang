@@ -89,7 +89,7 @@ public class DangNhapActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 checkLogin = true;
-                               finish();
+                                finish();
                             }
                         }
                     }

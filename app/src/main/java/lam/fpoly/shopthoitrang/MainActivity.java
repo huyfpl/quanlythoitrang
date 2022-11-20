@@ -15,6 +15,7 @@ import lam.fpoly.shopthoitrang.Fragment.Acc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.DanhMuc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.GioHang_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.Home_Fragment;
+import lam.fpoly.shopthoitrang.FragmentViewPager.Create_Fragment;
 
 public class MainActivity extends AppCompatActivity {
     private MeowBottomNavigation bottomNav;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.flFragment,fragment);
         transaction.commit();
     }
+
 
 
     //animation dưới lên

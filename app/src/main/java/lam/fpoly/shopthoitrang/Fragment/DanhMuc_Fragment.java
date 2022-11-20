@@ -1,5 +1,6 @@
 package lam.fpoly.shopthoitrang.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
@@ -19,8 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.tabs.TabLayout;
@@ -29,9 +26,11 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
-import lam.fpoly.shopthoitrang.Adapter.SanPhamAdapter;
 import lam.fpoly.shopthoitrang.Adapter.ViewPagerAdapter;
+import lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
+import lam.fpoly.shopthoitrang.FragmentViewPager.Create_Fragment;
+import lam.fpoly.shopthoitrang.Model.TbDanhMuc;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.R;
 
@@ -40,68 +39,27 @@ public class DanhMuc_Fragment extends Fragment {
 
     private TabLayout idTabDanhMuc;
     private ViewPager2 pager_DanhMuc;
-    SanPhamAdapter adapter;
-    List<TbSanPham> list;
+    private List<TbSanPham> list;
+    String TAG = "zzzzz";
     Toolbar toolbar;
-    TextView soluong;
-    LottieAnimationView loading;
+    //LottieAnimationView loading;
     String [] title = {};
+
+    TbDanhMucDao danhMucDao = new TbDanhMucDao();
+
+    List<TbDanhMuc> getList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View view= inflater.inflate(R.layout.fragment_danh_muc, container, false);
         setHasOptionsMenu(true);
-        loading=view.findViewById(R.id.loading);
         toolbar=view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        soluong = view.findViewById(R.id.soluong);
-        TbSanPhamDao catDao = new TbSanPhamDao();
 
-        //======== Thêm mới 1 dòng
-        TbSanPham newObjCat = new TbSanPham();
-        newObjCat.setTen_sanPham("Thể loại mới");
+        Log.i(TAG, "onCreateView: ");
 
-        catDao.insertRow(newObjCat);
-
-
-        //Sửa dữ liệu:
-        TbSanPham objCatUpdate = new TbSanPham();
-        objCatUpdate.setId_sanPham(3);
-        objCatUpdate.setTen_sanPham("Dép bitis");
-
-        catDao.updateRow(objCatUpdate);
-
-
-        // bước 9 thì không cần phần trên, dùng DAO để lấy dữ liệu
-
-        List<TbSanPham> listCat = catDao.getAll(); // lấy danh sách cho vào biến
-
-        // duyệt mảng in ra danh sách
-
-        list = new ArrayList<>();
-
-        for (int i = 0; i < listCat.size(); i++) {
-            TbSanPham obj = listCat.get(i);
-            Log.i("TAG", "onCreate: " + obj.getSrcAnh());
-            list.add(new TbSanPham(obj.getTen_sanPham(), obj.getSrcAnh(), obj.getGiaNhap(), obj.getGiaBan(), obj.getTonKho()));
-        }
-
-        // up lên rsv
-        RecyclerView rsv = view.findViewById(R.id.rsv);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        rsv.setLayoutManager(linearLayoutManager);
-
-        adapter = new SanPhamAdapter(getActivity(),list);
-        rsv.setAdapter(adapter);
-        // so luong
-        int sl = catDao.count();
-        soluong.setText(sl + "");
-
-
-        return view;
+       return view;
 
     }
     @Override
@@ -130,27 +88,47 @@ public class DanhMuc_Fragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText.toString());
+
                 return false;
             }
         });
         super.onCreateOptionsMenu(menu,inflater);
+
     }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //ScrollTab(view);
+        ScrollTab(view);
     }
 
-//    public void ScrollTab(View view){
-//        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity());
-//        idTabDanhMuc = view.findViewById(R.id.idTabDanhMuc);
-//        pager_DanhMuc = view.findViewById(R.id.pager_DanhMuc);
-//        new TabLayoutMediator(idTabDanhMuc, pager_DanhMuc,((tab, position) -> tab.setText(title[position]))).attach();
-//        idTabDanhMuc.setTabGravity(TabLayout.GRAVITY_CENTER);
-//        pager_DanhMuc.setAdapter(adapter);
-//        idTabDanhMuc.setTabMode(TabLayout.MODE_SCROLLABLE);
-//    }
-// tìm sản phẩm
+    public void ScrollTab(View view){
+        getList = danhMucDao.getAll();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity());
+        idTabDanhMuc = view.findViewById(R.id.idTabDanhMuc);
+        pager_DanhMuc = view.findViewById(R.id.idViewDanhMuc);
+        pager_DanhMuc.setAdapter(adapter);
+        new TabLayoutMediator(idTabDanhMuc, pager_DanhMuc,((tab, position) ->
+                tab.setText(getList.get(position).getTen_danhMuc()))).attach();
+        idTabDanhMuc.setTabGravity(TabLayout.GRAVITY_CENTER);
+        idTabDanhMuc.setTabMode(TabLayout.MODE_SCROLLABLE);
+        idTabDanhMuc.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Create_Fragment.setGirdView(tab.getText().toString());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
 
 }

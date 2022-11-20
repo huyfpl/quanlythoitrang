@@ -3,6 +3,7 @@ package lam.fpoly.shopthoitrang.AccFragment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ import lam.fpoly.shopthoitrang.R;
 public class ThongTinFragment extends Fragment {
 
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
-    LinearLayout user_edit;
+    LinearLayout user_edit,user_donhang;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
@@ -47,6 +48,7 @@ public class ThongTinFragment extends Fragment {
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
+        user_donhang = view.findViewById(R.id.user_donhang);
         khDao = new TbKhachHangDao();
         context = getActivity();
         id = DangNhapActivity.ID;
@@ -55,6 +57,13 @@ public class ThongTinFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openDialog();
+            }
+        });
+        user_donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,QuanLyDonHang.class);
+                startActivity(intent);
             }
         });
         return view;

@@ -18,5 +18,6 @@ public class GioHang_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_gio_hang, container, false);
+
     }
 }

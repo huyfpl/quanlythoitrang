@@ -7,7 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import android.widget.Button;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangKyActivity;
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.AccFragment.ThongTinFragment;
+import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.R;
 
 
@@ -50,5 +54,20 @@ public class Acc_Fragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Log.i("TAG", "onViewCreated: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (DangNhapActivity.checkLogin){
+            replaceFragment(new ThongTinFragment());
+        }
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(MainActivity.frame,fragment);
+        transaction.commit();
     }
 }

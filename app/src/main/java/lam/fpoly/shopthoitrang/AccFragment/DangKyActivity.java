@@ -1,10 +1,12 @@
 package lam.fpoly.shopthoitrang.AccFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +21,7 @@ import lam.fpoly.shopthoitrang.R;
 
 public class DangKyActivity extends AppCompatActivity {
     EditText edTenKH, edSoDT, edDiaChi, edUserName_dky, edPassWord_dky, edRePassWord;
-    Button btnDky, btnHuyDky;
+    TextView btnDky,signin;
     Context context = this;
     List<TbKhachHang> list = new ArrayList<>();
     TbKhachHangDao tbKhachHangDao = new TbKhachHangDao();
@@ -28,25 +30,28 @@ public class DangKyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_dang_ky);
-        edTenKH = findViewById(R.id.edTenKH);
+        signin=findViewById(R.id.signin);
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(DangKyActivity.this,DangNhapActivity.class);
+                startActivity(i);
+            }
+        });
         edSoDT = findViewById(R.id.edSoDT);
-        edDiaChi = findViewById(R.id.edDiaChi);
         edUserName_dky = findViewById(R.id.edUserName_dky);
         edPassWord_dky = findViewById(R.id.edPassword_dky);
         edRePassWord = findViewById(R.id.edRePassword);
         btnDky = findViewById(R.id.btnDky);
-        btnHuyDky = findViewById(R.id.btnHuyDky);
         btnDky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = edUserName_dky.getText().toString();
                 String userpass = edPassWord_dky.getText().toString();
                 String userRepass = edRePassWord.getText().toString();
-                String tenKH = edTenKH.getText().toString();
-                String diachi = edDiaChi.getText().toString();
                 String sdt = edSoDT.getText().toString();
 
-                if(username.equals("") || userpass.equals("") || userRepass.equals("") || tenKH.equals("")|| diachi.equals("")|| sdt.equals("")){
+                if(username.equals("") || userpass.equals("") || userRepass.equals("") || sdt.equals("")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Thông báo");
                     builder.setMessage("Nhập thiếu");
@@ -65,17 +70,11 @@ public class DangKyActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK",null);
                     builder.show();
                 }else {
-                    TbKhachHang tbKhachHang = new TbKhachHang(tenKH,sdt, diachi, username, userpass);
+                    TbKhachHang tbKhachHang = new TbKhachHang("chưa có thông tin!",sdt, "chưa có thông tin!", username, userpass);
                     tbKhachHangDao.insertRow(tbKhachHang);
                     Toast.makeText(context, "Đăng kí thành công!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            }
-        });
-        btnHuyDky.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }

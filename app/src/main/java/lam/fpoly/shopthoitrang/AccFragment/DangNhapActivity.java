@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,12 +26,13 @@ import lam.fpoly.shopthoitrang.R;
 
 public class DangNhapActivity extends AppCompatActivity {
     EditText edUserName, edPassword;
-    CheckBox chkRememberPass;
-    Button btnLogin, btnCancel;
+    TextView btnLogin, btnCancel,btnSignup;
     Context context;
     List<TbKhachHang> list;
     TbKhachHangDao tbKhachHangDao;
     public static int ID;
+    LinearLayout animlogin;
+    public static boolean checkLogin = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +41,19 @@ public class DangNhapActivity extends AppCompatActivity {
         context = this;
         edUserName = findViewById(R.id.edUserName);
         edPassword = findViewById(R.id.edPassword);
-        chkRememberPass = findViewById(R.id.chkRememberPass);
         btnLogin = findViewById(R.id.btnLogin);
         btnCancel = findViewById(R.id.btnCancel);
+        btnSignup=findViewById(R.id.btnSignup);
+
+        animlogin=findViewById(R.id.anim_login);
+        animlogin.startAnimation(AnimationUtils.loadAnimation(this,R.anim.animation_login));
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(DangNhapActivity.this,DangKyActivity.class);
+                startActivity(i);
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,8 +88,8 @@ public class DangNhapActivity extends AppCompatActivity {
                                 builder.show();
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context,ThongTinTaiKhoan.class);
-                                startActivity(intent);
+                                checkLogin = true;
+                               finish();
                             }
                         }
                     }

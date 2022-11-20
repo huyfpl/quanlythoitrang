@@ -11,6 +11,8 @@ import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
+import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.AccFragment.ThongTinFragment;
 import lam.fpoly.shopthoitrang.Fragment.Acc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.DanhMuc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.GioHang_Fragment;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private final int ID_GIOHANG = 3;
     private final int ID_ACC = 4;
 
+    public static int frame;
+
     //private final int CURRENT_FRAGMENT = ID_HOME;
 
     @Override
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNav = findViewById(R.id.bottomNav);
+
+        frame = R.id.flFragment;
 
         bottomNav.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_heart_fill));
         bottomNav.add(new MeowBottomNavigation.Model(ID_DANHMUC,R.drawable.category));
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new GioHang_Fragment());
                         break;
                     case ID_ACC:
+                        if (DangNhapActivity.checkLogin){
+                            replaceFragment(new ThongTinFragment());
+                        }
                         replaceFragment(new Acc_Fragment());
                         break;
                 }
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void replaceFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.flFragment,fragment);
+        transaction.replace(frame,fragment);
         transaction.commit();
     }
 

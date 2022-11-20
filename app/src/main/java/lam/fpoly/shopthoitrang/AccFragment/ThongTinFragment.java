@@ -1,12 +1,20 @@
 package lam.fpoly.shopthoitrang.AccFragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,41 +22,42 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
-public class ThongTinTaiKhoan extends AppCompatActivity {
+
+public class ThongTinFragment extends Fragment {
+
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
     LinearLayout user_edit;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
     int id;
+
+    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thong_tin_tai_khoan);
-
-        user_ten = findViewById(R.id.user_ten);
-        user_tendangnhap = findViewById(R.id.user_tendangnhap);
-        user_sdt = findViewById(R.id.user_sdt);
-        user_diachi = findViewById(R.id.user_diachi);
-        user_edit = findViewById(R.id.user_edit);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view= inflater.inflate(R.layout.fragment_thong_tin, container, false);
+        user_ten = view.findViewById(R.id.user_ten);
+        user_tendangnhap = view.findViewById(R.id.user_tendangnhap);
+        user_sdt = view.findViewById(R.id.user_sdt);
+        user_diachi = view.findViewById(R.id.user_diachi);
+        user_edit = view.findViewById(R.id.user_edit);
         khDao = new TbKhachHangDao();
-        context = this;
-
+        context = getActivity();
         id = DangNhapActivity.ID;
         setData();
-
         user_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog();
             }
         });
+        return view;
     }
     private void openDialog(){
         Dialog dialog = new Dialog(context);
@@ -106,5 +115,9 @@ public class ThongTinTaiKhoan extends AppCompatActivity {
         user_tendangnhap.setText(kh.getUserName());
         user_sdt.setText(kh.getSdt_khachHang());
         user_diachi.setText(kh.getDiaChi());
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

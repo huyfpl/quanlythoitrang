@@ -51,7 +51,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     @NonNull
     @Override
     public SanPhamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sanpham_item, parent, false);
+        View view = LayoutInflater.from(mtx).inflate(R.layout.sanpham_item, parent, false);
         return new SanPhamViewHolder(view);
     }
 
@@ -80,6 +80,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     @Override
     public int getItemCount() {
         return list.size();
+
     }
 
     // tìm sản phẩm

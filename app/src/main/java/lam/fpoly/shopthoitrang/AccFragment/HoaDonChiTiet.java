@@ -19,7 +19,8 @@ import lam.fpoly.shopthoitrang.Model.TbHoaDonChiTiet;
 import lam.fpoly.shopthoitrang.R;
 
 public class HoaDonChiTiet extends AppCompatActivity {
-    TextView hdct_hoten, hdct_sdt, hdct_diachi, hdct_trangthai, hdct_tensp_item, hdct_gia_item, hdct_soluong_item, hdct_tt_tensp, hdct_tt_tienhang, hdct_tt_ship, hdct_tt_tongtien;
+    TextView hdct_hoten, hdct_sdt, hdct_diachi, hdct_trangthai, hdct_tensp_item, hdct_gia_item,
+            hdct_soluong_item, hdct_tt_tensp, hdct_tt_tienhang, hdct_tt_ship, hdct_tt_tongtien;
     ImageView hdct_anh_item;
     Button btnSave;
     TbHoaDonChiTietDao tbHoaDonChiTietDao;

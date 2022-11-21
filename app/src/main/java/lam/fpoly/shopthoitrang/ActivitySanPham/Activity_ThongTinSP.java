@@ -40,7 +40,7 @@ public class Activity_ThongTinSP extends AppCompatActivity {
         idMuaNgay_CT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                
             }
         });
 

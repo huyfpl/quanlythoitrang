@@ -42,8 +42,7 @@ public class DangNhapActivity extends AppCompatActivity {
         edUserName = findViewById(R.id.edUserName);
         edPassword = findViewById(R.id.edPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnCancel = findViewById(R.id.btnCancel);
-        btnSignup=findViewById(R.id.btnSignup);
+        btnSignup=findViewById(R.id.btnSignUp);
 
         animlogin=findViewById(R.id.anim_login);
         animlogin.startAnimation(AnimationUtils.loadAnimation(this,R.anim.animation_login));

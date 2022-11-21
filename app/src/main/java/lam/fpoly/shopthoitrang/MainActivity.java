@@ -13,12 +13,12 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.AccFragment.ThongTinFragment;
 import lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.Fragment.DanhMuc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.GioHang_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.Home_Fragment;
-import lam.fpoly.shopthoitrang.Fragment.ThongTinFragment;
 import lam.fpoly.shopthoitrang.Model.TbDanhMuc;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_DM;

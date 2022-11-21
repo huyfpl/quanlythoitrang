@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
+import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
@@ -30,7 +31,7 @@ import lam.fpoly.shopthoitrang.R;
 public class ThongTinFragment extends Fragment {
 
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
-    LinearLayout user_edit;
+    LinearLayout user_edit,idDangXuat;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
@@ -47,6 +48,7 @@ public class ThongTinFragment extends Fragment {
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
+        idDangXuat = view.findViewById(R.id.idDangXuat);
         khDao = new TbKhachHangDao();
         context = getActivity();
         id = DangNhapActivity.ID;
@@ -57,6 +59,24 @@ public class ThongTinFragment extends Fragment {
                 openDialog();
             }
         });
+
+
+
+
+        //dangxuat
+        idDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_tendangnhap.setText("");
+                user_ten.setText("");
+                user_diachi.setText("");
+                user_sdt.setText("");
+                MainActivity.checkLogin = false;
+            }
+        });
+
+
+
         return view;
     }
     private void openDialog(){

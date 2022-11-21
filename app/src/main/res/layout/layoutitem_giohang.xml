@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:id="@+id/imgItemSP"
+                android:layout_width="130dp"
+                android:layout_height="173dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bomber"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_weight="9.5"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvItemNameSP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#BA101F37"
+                android:text="Áo Bomber Jacket"/>
+
+            <TextView
+                android:id="@+id/tvItemPriceSP"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="199.000 $"
+                android:textSize="22dp"
+                android:textColor="#11264A"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_marginTop="65dp"
+                android:background="@drawable/border_tanggiam"
+                android:layout_width="120dp"
+                android:gravity="center"
+                android:layout_height="40dp">
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:weightSum="10"
+                    android:background="#00000000"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgItemGiam"
+                        android:layout_weight="3"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/minus"/>
+
+                    <TextView
+                        android:id="@+id/tvItemSoLuong"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22dp"
+                        android:text="1"/>
+
+                    <ImageView
+                        android:id="@+id/imgItemTang"
+                        android:layout_weight="3"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/imgItemCheckBox"
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/custom_checkbox"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+</LinearLayout>

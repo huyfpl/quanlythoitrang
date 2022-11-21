@@ -1,6 +1,12 @@
 package lam.fpoly.shopthoitrang.Model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "tb.sanpham")
 public class TbSanPham {
+    @PrimaryKey(autoGenerate = true)
+    int id;
     int id_sanPham;
     String ten_sanPham;
     String srcAnh;
@@ -12,12 +18,22 @@ public class TbSanPham {
     public TbSanPham() {
     }
 
-    public TbSanPham(String ten_sanPham, String srcAnh, int giaNhap, int giaBan, int tonKho) {
+    public TbSanPham(int id_sanPham, String ten_sanPham, String srcAnh, int giaNhap, int giaBan, int tonKho, int id_danhmuc) {
+        this.id_sanPham = id_sanPham;
         this.ten_sanPham = ten_sanPham;
         this.srcAnh = srcAnh;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.tonKho = tonKho;
+        this.id_danhmuc = id_danhmuc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId_sanPham() {

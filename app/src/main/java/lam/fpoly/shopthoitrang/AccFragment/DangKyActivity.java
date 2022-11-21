@@ -1,5 +1,6 @@
 package lam.fpoly.shopthoitrang.AccFragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,12 +26,21 @@ public class DangKyActivity extends AppCompatActivity {
     Context context = this;
     List<TbKhachHang> list = new ArrayList<>();
     TbKhachHangDao tbKhachHangDao = new TbKhachHangDao();
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_dang_ky);
-        signin=findViewById(R.id.signin);
+        signin=findViewById(R.id.idSignIn);
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,5 +95,11 @@ public class DangKyActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

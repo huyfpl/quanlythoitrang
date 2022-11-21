@@ -5,21 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FC7A96"
-
     android:orientation="vertical"
-
     tools:context=".AccFragment.DangNhapActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/nen" />
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:src="@drawable/nen" />
+
+       <ImageView
+           android:id="@+id/idBackActivity"
+           android:padding="10dp"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:src="@drawable/back"/>
+
+   </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="330dp"
         android:layout_gravity="center"
-        android:layout_marginTop="-90dp"
+        android:layout_marginTop="-60dp"
         android:id="@+id/anim_login"
         android:background="@drawable/background_login"
         android:orientation="vertical">
@@ -29,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
             android:hint="User Name"
             app:boxBackgroundColor="@color/black"
@@ -131,7 +142,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
@@ -142,7 +152,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/btnSignup"
+                android:id="@+id/btnSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginLeft="5dp"

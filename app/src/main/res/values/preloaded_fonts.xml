@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alike_angular</item>
         <item>@font/arbutus_slab</item>
+        <item>@font/archivo_medium</item>
         <item>@font/asap_bold</item>
+        <item>@font/baloo</item>
+        <item>@font/bungee_inline</item>
         <item>@font/cabin</item>
         <item>@font/cabin_bold</item>
         <item>@font/cabin_medium</item>
+        <item>@font/gilda_display</item>
+        <item>@font/lemonada</item>
+        <item>@font/lemonada_light</item>
+        <item>@font/lexend_mega</item>
+        <item>@font/playfair_display</item>
     </array>
 </resources>

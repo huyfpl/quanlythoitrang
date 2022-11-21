@@ -4,20 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import android.widget.Switch;
+import android.util.Log;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
+import java.util.List;
+
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
-import lam.fpoly.shopthoitrang.AccFragment.ThongTinFragment;
-import lam.fpoly.shopthoitrang.Fragment.Acc_Fragment;
+import lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;
+import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.Fragment.DanhMuc_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.GioHang_Fragment;
 import lam.fpoly.shopthoitrang.Fragment.Home_Fragment;
-import lam.fpoly.shopthoitrang.FragmentViewPager.Create_Fragment;
+import lam.fpoly.shopthoitrang.Fragment.ThongTinFragment;
+import lam.fpoly.shopthoitrang.Model.TbDanhMuc;
+import lam.fpoly.shopthoitrang.Model.TbSanPham;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_DM;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
 
 public class MainActivity extends AppCompatActivity {
     private MeowBottomNavigation bottomNav;
@@ -29,26 +35,67 @@ public class MainActivity extends AppCompatActivity {
 
     public static int frame;
 
-    //private final int CURRENT_FRAGMENT = ID_HOME;
+    public static boolean checkLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNav = findViewById(R.id.bottomNav);
 
+        downloadSanPhamLocal();
+        downloadDanhMucLocal();
+
+        bottomNav = findViewById(R.id.bottomNav);
         frame = R.id.flFragment;
+
+        //dang nhap to main
+        Intent intent = getIntent();
+        int values = intent.getIntExtra("ID_ACC",1);
+        if(values == ID_ACC){
+            replaceFragment(new ThongTinFragment());
+        }else{
+            replaceFragment(new Home_Fragment());
+        }
+
+
 
         bottomNav.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_heart_fill));
         bottomNav.add(new MeowBottomNavigation.Model(ID_DANHMUC,R.drawable.category));
         bottomNav.add(new MeowBottomNavigation.Model(ID_GIOHANG,R.drawable.shopping_cart));
         bottomNav.add(new MeowBottomNavigation.Model(ID_ACC,R.drawable.user_avatar_filled));
 
-        replaceFragment(new Home_Fragment());
-
         bottomNav.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()){
+                    case ID_HOME:
+                        replaceFragment(new Home_Fragment());
+                        MyDataBase_Temporary.getInstance(MainActivity.this).donHangDAO().delete();
+                        break;
+                    case ID_DANHMUC:
+                        replaceFragment(new DanhMuc_Fragment());
+                        MyDataBase_Temporary.getInstance(MainActivity.this).donHangDAO().delete();
+                        break;
+                    case ID_GIOHANG:
+                        replaceFragment(new GioHang_Fragment());
+                        MyDataBase_Temporary.getInstance(MainActivity.this).donHangDAO().delete();
+                        break;
+                    case ID_ACC:
+                        if (checkLogin) {
+                            replaceFragment(new ThongTinFragment());
+                        }else{
+                            Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
+                            startActivity(intent);
+                        }
+                        MyDataBase_Temporary.getInstance(MainActivity.this).donHangDAO().delete();
+                        break;
+                }
+            }
+        });
+
+        bottomNav.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
                 switch (item.getId()){
                     case ID_HOME:
                         replaceFragment(new Home_Fragment());
@@ -60,10 +107,12 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new GioHang_Fragment());
                         break;
                     case ID_ACC:
-                        if (DangNhapActivity.checkLogin){
+                        if (checkLogin) {
                             replaceFragment(new ThongTinFragment());
+                        }else{
+                            Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
+                            startActivity(intent);
                         }
-                        replaceFragment(new Acc_Fragment());
                         break;
                 }
             }
@@ -76,7 +125,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomNav.show(ID_HOME,true);
+
+        if(values == ID_ACC){
+            bottomNav.show(ID_ACC,true);
+        }else{
+            bottomNav.show(ID_HOME,true);
+        }
 
     }
 
@@ -89,6 +143,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void downloadSanPhamLocal(){
+        MyDataBase_SP.getInstance(this).sanPhamDAO().deleteAll();
+        TbSanPhamDao sanPhamDao = new TbSanPhamDao();
+        List<TbSanPham> list = sanPhamDao.getAll();
+        for (int i = 0 ; i < list.size() ; i++){
+            int idSp = list.get(i).getId_sanPham();
+            String tenSP = list.get(i).getTen_sanPham();
+            String anhSP = list.get(i).getSrcAnh();
+            int giaNhapSP = list.get(i).getGiaNhap();
+            int giaBanSP = list.get(i).getGiaBan();
+            int tonKho = list.get(i).getTonKho();
+            int danhMuc = list.get(i).getId_danhmuc();
+            TbSanPham tbSanPham = new TbSanPham(idSp,tenSP,anhSP,giaNhapSP,giaBanSP,tonKho,danhMuc);
+            MyDataBase_SP.getInstance(this).sanPhamDAO().insertData(tbSanPham);
+        }
+        Log.i("HoatDong1111111111", "downloadSanPhamLocal: download xong: "+list.size());
+    }
+
+    private void downloadDanhMucLocal(){
+        MyDataBase_DM.getInstance(this).danhMucDAO().deleteAll();
+        TbDanhMucDao danhMucDao = new TbDanhMucDao();
+        List<TbDanhMuc> list = danhMucDao.getAll();
+        for (int i = 0 ; i < list.size() ; i++){
+            int idDM = list.get(i).getId_danhMuc();
+            String tenDM = list.get(i).getTen_danhMuc();
+            TbDanhMuc tbDanhMuc = new TbDanhMuc(idDM,tenDM);
+            MyDataBase_DM.getInstance(this).danhMucDAO().insertData(tbDanhMuc);
+        }
+        Log.i("HoatDong1111111111", "downloadDanhMucLocal: download xong: "+list.size());
+    }
+
+    @Override
+    protected void onDestroy() {
+        MyDataBase_Temporary.getInstance(this).donHangDAO().delete();
+        super.onDestroy();
+    }
 
     //animation dưới lên
 //    ObjectAnimator anim = ObjectAnimator.ofFloat(imgLogo,"translationY",0,-1000f);

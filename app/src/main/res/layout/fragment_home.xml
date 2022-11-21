@@ -148,19 +148,20 @@
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.tabs.TabLayout
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/idTabLayOut"
+            android:id="@+id/idTabHome"
             android:layout_width="match_parent"
             android:layout_height="30dp"/>
 
 
         <androidx.viewpager2.widget.ViewPager2
             android:layout_gravity="center"
-            android:id="@+id/idViewPager2"
+            android:id="@+id/idViewHome"
             android:layout_width="370dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="50dp"/>
 
     </LinearLayout>
 

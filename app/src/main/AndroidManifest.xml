@@ -37,7 +37,6 @@
         </activity>
         <activity android:name=".AccFragment.DangKyActivity"/>
         <activity android:name=".AccFragment.DangNhapActivity"/>
-        <activity android:name=".ActivitySanPham.Activity_ThongTinSP"/>
 
         <meta-data
             android:name="preloaded_fonts"

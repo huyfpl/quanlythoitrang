@@ -1,18 +1,15 @@
-package lam.fpoly.shopthoitrang.Fragment;
+package lam.fpoly.shopthoitrang.AccFragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,21 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import lam.fpoly.shopthoitrang.AccFragment.DangKyActivity;
-import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
-import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
@@ -59,7 +47,6 @@ public class ThongTinFragment extends Fragment {
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
-
         khDao = new TbKhachHangDao();
         context = getActivity();
         id = DangNhapActivity.ID;
@@ -70,7 +57,6 @@ public class ThongTinFragment extends Fragment {
                 openDialog();
             }
         });
-
         return view;
     }
     private void openDialog(){
@@ -122,17 +108,16 @@ public class ThongTinFragment extends Fragment {
         });
         dialog.show();
     }
-
     private void setData(){
-        try {
-            TbKhachHangDao spDao = new TbKhachHangDao();
-            kh = spDao.getUser(id);
-            user_ten.setText(kh.getTen_khachHang());
-            user_tendangnhap.setText(kh.getUserName());
-            user_sdt.setText(kh.getSdt_khachHang());
-            user_diachi.setText(kh.getDiaChi());
-        }catch (Exception e){
-        }
+        TbKhachHangDao spDao = new TbKhachHangDao();
+        kh = spDao.getUser(id);
+        user_ten.setText(kh.getTen_khachHang());
+        user_tendangnhap.setText(kh.getUserName());
+        user_sdt.setText(kh.getSdt_khachHang());
+        user_diachi.setText(kh.getDiaChi());
     }
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 }

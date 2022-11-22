@@ -1,35 +1,40 @@
 package lam.fpoly.shopthoitrang.Model;
 
 public class TbHoaDonChiTiet {
-    String hoten;
-    int sdt;
-    String diachi;
+    int id_DonHang;
+    int id_SanPham;
+    int soLuong;
 
     public TbHoaDonChiTiet() {
     }
 
-    public String getHoten() {
-        return hoten;
+    public TbHoaDonChiTiet(int id_DonHang, int id_SanPham, int soLuong) {
+        this.id_DonHang = id_DonHang;
+        this.id_SanPham = id_SanPham;
+        this.soLuong = soLuong;
     }
 
-    public void setHoten(String hoten) {
-        this.hoten = hoten;
+    public int getId_DonHang() {
+        return id_DonHang;
     }
 
-    public int getSdt() {
-        return sdt;
+    public void setId_DonHang(int id_DonHang) {
+        this.id_DonHang = id_DonHang;
     }
 
-    public void setSdt(int sdt) {
-        this.sdt = sdt;
+    public int getId_SanPham() {
+        return id_SanPham;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public void setId_SanPham(int id_SanPham) {
+        this.id_SanPham = id_SanPham;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public int getSoLuong() {
+        return soLuong;
     }
 
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
 }

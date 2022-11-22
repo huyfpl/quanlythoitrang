@@ -54,10 +54,10 @@ public class TbGioHangDao {
         }
     }
 
-    public void updateRow(TbGioHang obj,int soluong){
+    public void updateRow(TbGioHang obj){
         try {
             if (this.objConn != null) {
-                String sqlUpdate = "UPDATE gioHang SET soluong = '"+soluong+"' " +
+                String sqlUpdate = "UPDATE gioHang SET soluong = '"+obj.getSoLuongSP()+"' " +
                         "WHERE id_khachHang = '"+obj.getIdKhachHang()+"' AND id_sanPham = '"+ obj.getIdSanPham()+"'";
 
                 PreparedStatement stmt = this.objConn.prepareStatement(sqlUpdate);
@@ -67,4 +67,49 @@ public class TbGioHangDao {
             Log.i("TAG", "updateRow: lỗi");
         }
     }
+
+    public void insertRow (TbGioHang objCat){
+        try {
+            if (this.objConn != null) {
+                String insertSQL = "INSERT INTO gioHang VALUES (" +
+                        "'"+objCat.getIdSanPham()+"'," +
+                        "'"+objCat.getIdKhachHang()+"',"+
+                        "'"+objCat.getSoLuongSP()+"')";
+                String generatedColumns[] = { "ID" };
+                PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
+                stmtInsert.execute();
+                // lấy ra ID cột tự động tăng
+                ResultSet rs = stmtInsert.getGeneratedKeys();
+                if (rs.next()) {
+                    long id = rs.getLong(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public boolean checkExist(TbGioHang tbGioHang){
+        boolean check = false;
+        try {
+            if (this.objConn != null) {
+                String sqlQuery = "SELECT * FROM gioHang " +
+                        "WHERE id_khachHang = '"+tbGioHang.getIdKhachHang()+"' " +
+                        "AND id_sanPham = '"+tbGioHang.getIdSanPham()+"'";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    if(resultSet.wasNull()){
+                        check = true;
+                    }else{
+                        check = false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "getKhachHang: lỗi");
+        }
+
+        return  check;
+    }
+
 }

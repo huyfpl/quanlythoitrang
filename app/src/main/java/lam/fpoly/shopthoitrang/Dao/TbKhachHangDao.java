@@ -105,7 +105,7 @@ public class TbKhachHangDao {
                 }
             }
         } catch (Exception e) {
-            Log.i("TAG", "getAll: lỗi");
+            Log.i("TAG", "getUser: lỗi");
         }
         return  listKH.get(0);
     }

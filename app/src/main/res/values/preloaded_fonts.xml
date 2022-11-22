@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/adamina</item>
         <item>@font/alike_angular</item>
+        <item>@font/andika_new_basic</item>
         <item>@font/arbutus_slab</item>
         <item>@font/archivo_medium</item>
         <item>@font/asap_bold</item>
@@ -14,6 +16,9 @@
         <item>@font/lemonada</item>
         <item>@font/lemonada_light</item>
         <item>@font/lexend_mega</item>
+        <item>@font/noto_sans</item>
+        <item>@font/noto_sans_bold</item>
         <item>@font/playfair_display</item>
+        <item>@font/quattrocento_sans_bold</item>
     </array>
 </resources>

@@ -20,6 +20,7 @@ public interface DonHangDAO {
     @Query("SELECT * FROM donhang WHERE id = :id")
     DonHang_Temorary getObjectData(int id);
 
+
     @Query("SELECT soLuong FROM donhang WHERE id = :id")
     int getSoLuong(int id);
 

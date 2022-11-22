@@ -100,7 +100,8 @@ public class DangNhapActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 MainActivity.checkLogin = true;
-                                finish();
+                                Intent intent = new Intent(context,MainActivity.class);
+                                startActivity(intent);
                             }
                         }
                     }

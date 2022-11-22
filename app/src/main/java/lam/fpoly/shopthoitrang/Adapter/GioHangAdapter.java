@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,6 +80,11 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 interClickItemData.clickCheck(tbSanPham,i,obj,isChecked);
+                if (isChecked){
+                    holder.idLayoutTangGiam.setVisibility(View.VISIBLE);
+                }else {
+                    holder.idLayoutTangGiam.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -86,12 +92,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             @Override
             public void onClick(View v) {
                 if (number > 1) {
-                    number = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getSoLuong(position);
+                    number = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getSoLuong(i);
                     number--;
                     holder.tvSoLuongItem.setText(String.valueOf(number));
                     DonHang_Temorary donHang_temorary = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getObjectData(i);
                     MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number, donHang_temorary.getId());
-                    tbGioHangDao.updateRow(obj,number);
+                    tbGioHangDao.updateRow(obj);
                     interClickItemData.clickDown();
                 }
             }
@@ -102,12 +108,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         holder.imgItemTang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                number = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getSoLuong(position);
+                number = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getSoLuong(i);
                 number++;
                 holder.tvSoLuongItem.setText(String.valueOf(number));
                 DonHang_Temorary donHang_temorary = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getObjectData(i);
                 MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number, donHang_temorary.getId());
-                tbGioHangDao.updateRow(obj,number);
+                tbGioHangDao.updateRow(obj);
                 interClickItemData.clickUp();
             }
         });
@@ -134,6 +140,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         ImageView imgSanPham,imgItemGiam,imgItemTang;
         CheckBox imgItemCheck;
         Context context;
+        LinearLayout idLayoutTangGiam;
         public GioHangViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName_SanPham = itemView.findViewById(R.id.tvItemNameSP);
@@ -143,6 +150,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             imgItemGiam = itemView.findViewById(R.id.imgItemGiam);
             imgItemTang = itemView.findViewById(R.id.imgItemTang);
             tvSoLuongItem = itemView.findViewById(R.id.tvItemSoLuong);
+            idLayoutTangGiam = itemView.findViewById(R.id.idLayoutTangGiam);
             context = itemView.getContext();
         }
     }

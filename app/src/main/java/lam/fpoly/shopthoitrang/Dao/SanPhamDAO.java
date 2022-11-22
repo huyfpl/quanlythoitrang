@@ -7,6 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
+import lam.fpoly.shopthoitrang.Object.DonHang_Temorary;
 
 @Dao
 public interface SanPhamDAO {

@@ -24,6 +24,7 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.ActivitySanPham.HoaDonChiTiet;
 import lam.fpoly.shopthoitrang.Adapter.GioHangAdapter;
 import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Model.TbGioHang;
@@ -45,7 +46,6 @@ public class GioHang_Fragment extends Fragment {
     int showLayout = 0;
     DonHang_Temorary donHang;
     int tienHang = 0;
-    int tongTien = 0;
 
 
     @Override
@@ -111,8 +111,8 @@ public class GioHang_Fragment extends Fragment {
         tvMuaNgay_GH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(),HoaDonChiTiet.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), HoaDonChiTiet.class);
+                startActivity(intent);
             }
         });
 

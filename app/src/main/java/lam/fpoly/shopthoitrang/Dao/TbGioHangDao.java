@@ -72,8 +72,8 @@ public class TbGioHangDao {
         try {
             if (this.objConn != null) {
                 String insertSQL = "INSERT INTO gioHang VALUES (" +
-                        "'"+objCat.getIdSanPham()+"'," +
-                        "'"+objCat.getIdKhachHang()+"',"+
+                        "'"+objCat.getIdKhachHang()+"'," +
+                        "'"+objCat.getIdSanPham()+"',"+
                         "'"+objCat.getSoLuongSP()+"')";
                 String generatedColumns[] = { "ID" };
                 PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);

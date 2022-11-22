@@ -32,6 +32,7 @@ import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.FragmentViewPager.Create_Fragment;
 import lam.fpoly.shopthoitrang.Model.TbDanhMuc;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_DM;
 import lam.fpoly.shopthoitrang.R;
 
 
@@ -39,15 +40,10 @@ public class DanhMuc_Fragment extends Fragment {
 
     private TabLayout idTabDanhMuc;
     private ViewPager2 pager_DanhMuc;
-    private List<TbSanPham> list;
-    String TAG = "zzzzz";
     Toolbar toolbar;
     //LottieAnimationView loading;
-    String [] title = {};
-
-    TbDanhMucDao danhMucDao = new TbDanhMucDao();
-
-    List<TbDanhMuc> getList = new ArrayList<>();
+    public static String NAME;
+    List<TbDanhMuc> getList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,8 +52,6 @@ public class DanhMuc_Fragment extends Fragment {
         setHasOptionsMenu(true);
         toolbar=view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
-        Log.i(TAG, "onCreateView: ");
 
        return view;
 
@@ -104,11 +98,11 @@ public class DanhMuc_Fragment extends Fragment {
     }
 
     public void ScrollTab(View view){
-        getList = danhMucDao.getAll();
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity());
         idTabDanhMuc = view.findViewById(R.id.idTabDanhMuc);
         pager_DanhMuc = view.findViewById(R.id.idViewDanhMuc);
         pager_DanhMuc.setAdapter(adapter);
+        getList = MyDataBase_DM.getInstance(getActivity()).danhMucDAO().getDataAll();
         new TabLayoutMediator(idTabDanhMuc, pager_DanhMuc,((tab, position) ->
                 tab.setText(getList.get(position).getTen_danhMuc()))).attach();
         idTabDanhMuc.setTabGravity(TabLayout.GRAVITY_CENTER);
@@ -116,7 +110,7 @@ public class DanhMuc_Fragment extends Fragment {
         idTabDanhMuc.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Create_Fragment.setGirdView(tab.getText().toString());
+
             }
 
             @Override
@@ -126,7 +120,6 @@ public class DanhMuc_Fragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }

@@ -11,9 +11,11 @@
         app:cardCornerRadius="30dp">
 
         <ImageView
+            android:id="@+id/item_Img"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1AAAA"/>
+            android:src="@drawable/bomber"/>
 
    </androidx.cardview.widget.CardView>
 
@@ -31,6 +33,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvSpName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên áo"
@@ -38,6 +41,7 @@
                 android:textColor="#1E355C"/>
 
             <TextView
+                android:id="@+id/tvSpPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="299000"

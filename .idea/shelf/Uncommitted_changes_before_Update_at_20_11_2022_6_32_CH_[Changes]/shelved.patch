@@ -1,0 +1,194 @@
+Index: app/src/main/java/lam/fpoly/shopthoitrang/FragmentViewPager/Create_Fragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lam.fpoly.shopthoitrang.FragmentViewPager;\r\n\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.GridView;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.android.material.tabs.TabLayout;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport lam.fpoly.shopthoitrang.Adapter.MyAdapter_GirdView;\r\nimport lam.fpoly.shopthoitrang.Adapter.ViewPagerAdapter;\r\nimport lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;\r\nimport lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;\r\nimport lam.fpoly.shopthoitrang.Model.TbDanhMuc;\r\nimport lam.fpoly.shopthoitrang.Model.TbSanPham;\r\nimport lam.fpoly.shopthoitrang.R;\r\n\r\n\r\npublic class Create_Fragment extends Fragment {\r\n    public static GridView idGridView;\r\n    public static TbSanPhamDao sanPhamDao;\r\n    public static MyAdapter_GirdView myAdapterGirdView;\r\n    public static List<TbSanPham> list;\r\n    public static TbDanhMucDao danhMucDao;\r\n    public static int id;\r\n    private View view;\r\n    public static Context context;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        view = inflater.inflate(R.layout.fragment_create_, container, false);\r\n        idGridView = view.findViewById(R.id.idGridView);\r\n        context = view.getContext();\r\n        return view;\r\n    }\r\n\r\n//    public void ReceiveData(String data){\r\n//        danhMucDao = new TbDanhMucDao();\r\n//        sanPhamDao = new TbSanPhamDao();\r\n//        id = danhMucDao.getID(data);\r\n//        Log.i(\"TAG\", \"ReceiveData: \"+data);\r\n//        list = new ArrayList<>();\r\n//        list = sanPhamDao.getSpDanhMuc(id);\r\n//        myAdapterGirdView = new MyAdapter_GirdView(getContext(),list);\r\n//        idGridView.setAdapter(myAdapterGirdView);\r\n//    }\r\n\r\n    public static void setGirdView(String data){\r\n        danhMucDao = new TbDanhMucDao();\r\n        sanPhamDao = new TbSanPhamDao();\r\n        id = danhMucDao.getID(data);\r\n        list = new ArrayList<>();\r\n        list = sanPhamDao.getSpDanhMuc(id);\r\n        myAdapterGirdView = new MyAdapter_GirdView(context,list);\r\n        idGridView.setAdapter(myAdapterGirdView);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/FragmentViewPager/Create_Fragment.java b/app/src/main/java/lam/fpoly/shopthoitrang/FragmentViewPager/Create_Fragment.java
+--- a/app/src/main/java/lam/fpoly/shopthoitrang/FragmentViewPager/Create_Fragment.java	(revision 98508f6e13423b6deb2f0bf375d2f7f72973f2d3)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/FragmentViewPager/Create_Fragment.java	(date 1668939614510)
+@@ -45,25 +45,17 @@
+         view = inflater.inflate(R.layout.fragment_create_, container, false);
+         idGridView = view.findViewById(R.id.idGridView);
+         context = view.getContext();
++        list = new ArrayList<>();
++        sanPhamDao = new TbSanPhamDao();
++        list = sanPhamDao.getSpDanhMuc(1);
++        myAdapterGirdView = new MyAdapter_GirdView(context,list);
++        idGridView.setAdapter(myAdapterGirdView);
+         return view;
+     }
+ 
+-//    public void ReceiveData(String data){
+-//        danhMucDao = new TbDanhMucDao();
+-//        sanPhamDao = new TbSanPhamDao();
+-//        id = danhMucDao.getID(data);
+-//        Log.i("TAG", "ReceiveData: "+data);
+-//        list = new ArrayList<>();
+-//        list = sanPhamDao.getSpDanhMuc(id);
+-//        myAdapterGirdView = new MyAdapter_GirdView(getContext(),list);
+-//        idGridView.setAdapter(myAdapterGirdView);
+-//    }
+-
+     public static void setGirdView(String data){
+         danhMucDao = new TbDanhMucDao();
+-        sanPhamDao = new TbSanPhamDao();
+         id = danhMucDao.getID(data);
+-        list = new ArrayList<>();
+         list = sanPhamDao.getSpDanhMuc(id);
+         myAdapterGirdView = new MyAdapter_GirdView(context,list);
+         idGridView.setAdapter(myAdapterGirdView);
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.ShopThoiTrang\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".manhinhcho.manhinhcho\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n\r\n\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".AccFragment.DangKyActivity\"/>\r\n        <activity android:name=\".AccFragment.DangNhapActivity\"/>\r\n        <activity android:name=\".AccFragment.ThongTinTaiKhoan\"/>\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 98508f6e13423b6deb2f0bf375d2f7f72973f2d3)
++++ b/app/src/main/AndroidManifest.xml	(date 1668941407553)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
++
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ 
+@@ -15,11 +16,19 @@
+         android:theme="@style/Theme.ShopThoiTrang"
+         tools:targetApi="31">
+         <activity
++            android:name=".ActivitySanPham.Activity_ThongTinSP"
++            android:exported="false">
++            <meta-data
++                android:name="android.app.lib_name"
++                android:value="" />
++        </activity>
++        <activity
+             android:name=".manhinhcho.manhinhcho"
+             android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
++
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+@@ -29,15 +38,14 @@
+         <activity
+             android:name=".MainActivity"
+             android:exported="true">
+-
+-
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+-        <activity android:name=".AccFragment.DangKyActivity"/>
+-        <activity android:name=".AccFragment.DangNhapActivity"/>
+-        <activity android:name=".AccFragment.ThongTinTaiKhoan"/>
++        <activity android:name=".AccFragment.DangKyActivity" />
++        <activity android:name=".AccFragment.DangNhapActivity" />
++        <activity android:name=".AccFragment.ThongTinTaiKhoan" />
++
+         <meta-data
+             android:name="preloaded_fonts"
+             android:resource="@array/preloaded_fonts" />
+Index: app/src/main/java/lam/fpoly/shopthoitrang/Adapter/MyAdapter_GirdView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lam.fpoly.shopthoitrang.Adapter;\r\n\r\nimport android.content.Context;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Filter;\r\nimport android.widget.Filterable;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport lam.fpoly.shopthoitrang.Model.TbSanPham;\r\nimport lam.fpoly.shopthoitrang.R;\r\n\r\npublic class MyAdapter_GirdView extends BaseAdapter implements Filterable {\r\n    private Context context;\r\n    private List<TbSanPham> list = new ArrayList<>();\r\n\r\n    public MyAdapter_GirdView(Context context, List<TbSanPham> list) {\r\n        this.context = context;\r\n        this.list = list;\r\n    }\r\n\r\n    @Override\r\n    public int getCount() {\r\n        return list.size();\r\n    }\r\n\r\n    @Override\r\n    public Object getItem(int position) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public long getItemId(int position) {\r\n        return 0;\r\n    }\r\n\r\n    @Override\r\n    public View getView(int position, View convertView, ViewGroup parent) {\r\n        IconViewHolder viewHolder = null;\r\n        if(convertView == null){\r\n            viewHolder = new IconViewHolder();\r\n            LayoutInflater inflater = (LayoutInflater) context.\r\n                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);\r\n            convertView = inflater.inflate(R.layout.layouitem_danhmuc,null);\r\n            viewHolder.itemImg = convertView.findViewById(R.id.item_Img);\r\n            viewHolder.tvSpName = convertView.findViewById(R.id.tvSpName);\r\n            viewHolder.tvSpPrice = convertView.findViewById(R.id.tvSpPrice);\r\n            convertView.setTag(viewHolder);\r\n        }else{\r\n            viewHolder = (IconViewHolder) convertView.getTag();\r\n        }\r\n        viewHolder.tvSpName.setText(list.get(position).getTen_sanPham());\r\n        viewHolder.tvSpPrice.setText(String.valueOf(list.get(position).getGiaBan()));\r\n        Picasso.get().load(list.get(position).getSrcAnh()).fit().into(viewHolder.itemImg);\r\n        return convertView;\r\n    }\r\n\r\n    public static class IconViewHolder{\r\n        private TextView tvSpName,tvSpPrice;\r\n        private ImageView itemImg;\r\n    }\r\n\r\n    @Override\r\n    public Filter getFilter() {\r\n        return null;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/MyAdapter_GirdView.java b/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/MyAdapter_GirdView.java
+--- a/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/MyAdapter_GirdView.java	(revision 98508f6e13423b6deb2f0bf375d2f7f72973f2d3)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/MyAdapter_GirdView.java	(date 1668941357875)
+@@ -1,6 +1,7 @@
+ package lam.fpoly.shopthoitrang.Adapter;
+ 
+ import android.content.Context;
++import android.content.Intent;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+@@ -15,6 +16,7 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++import lam.fpoly.shopthoitrang.ActivitySanPham.Activity_ThongTinSP;
+ import lam.fpoly.shopthoitrang.Model.TbSanPham;
+ import lam.fpoly.shopthoitrang.R;
+ 
+@@ -60,6 +62,15 @@
+         viewHolder.tvSpName.setText(list.get(position).getTen_sanPham());
+         viewHolder.tvSpPrice.setText(String.valueOf(list.get(position).getGiaBan()));
+         Picasso.get().load(list.get(position).getSrcAnh()).fit().into(viewHolder.itemImg);
++
++        convertView.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                Intent intent = new Intent(context, Activity_ThongTinSP.class);
++                context.startActivity(intent);
++            }
++        });
++
+         return convertView;
+     }
+ 
+Index: app/src/main/res/layout/activity_activiti_thong_tin_sp.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml b/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml
+new file mode 100644
+--- /dev/null	(date 1668941357878)
++++ b/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml	(date 1668941357878)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@color/datroi"
++    tools:context=".ActivitySanPham.Activity_ThongTinSP">
++
++
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java b/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java
+new file mode 100644
+--- /dev/null	(date 1668941357870)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java	(date 1668941357870)
+@@ -0,0 +1,19 @@
++package lam.fpoly.shopthoitrang.ActivitySanPham;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++import lam.fpoly.shopthoitrang.R;
++
++public class Activity_ThongTinSP extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_activiti_thong_tin_sp);
++
++
++
++    }
++}
+\ No newline at end of file

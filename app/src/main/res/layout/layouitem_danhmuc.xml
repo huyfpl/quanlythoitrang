@@ -3,8 +3,6 @@
     android:layout_width="101dp"
     android:layout_height="185dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="5dp"
-    app:cardBackgroundColor="#40000000"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,9 +18,10 @@
 
             <ImageView
                 android:id="@+id/item_Img"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/purple_200"/>
+                android:src="@drawable/bomber"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -46,5 +45,11 @@
             android:textSize="7.5sp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#5B000000" />
 
 </androidx.cardview.widget.CardView>

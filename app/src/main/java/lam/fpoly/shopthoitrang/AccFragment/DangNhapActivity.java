@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,18 +22,19 @@ import java.util.List;
 
 
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
+import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
 public class DangNhapActivity extends AppCompatActivity {
     EditText edUserName, edPassword;
-    TextView btnLogin, btnCancel,btnSignup;
+    TextView btnLogin,btnSignup;
     Context context;
     List<TbKhachHang> list;
     TbKhachHangDao tbKhachHangDao;
+    ImageView idBackActivity;
     public static int ID;
     LinearLayout animlogin;
-    public static boolean checkLogin = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +42,22 @@ public class DangNhapActivity extends AppCompatActivity {
         list = new ArrayList<>();
         context = this;
         edUserName = findViewById(R.id.edUserName);
+        idBackActivity = findViewById(R.id.idBackActivity);
         edPassword = findViewById(R.id.edPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnCancel = findViewById(R.id.btnCancel);
-        btnSignup=findViewById(R.id.btnSignup);
+        btnSignup=findViewById(R.id.btnSignUp);
 
         animlogin=findViewById(R.id.anim_login);
         animlogin.startAnimation(AnimationUtils.loadAnimation(this,R.anim.animation_login));
+
+        idBackActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(DangNhapActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +99,9 @@ public class DangNhapActivity extends AppCompatActivity {
                                 builder.show();
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                checkLogin = true;
-                                finish();
+                                MainActivity.checkLogin = true;
+                                Intent intent = new Intent(context,MainActivity.class);
+                                startActivity(intent);
                             }
                         }
                     }
@@ -100,12 +112,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     builder.show();
                 }
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }

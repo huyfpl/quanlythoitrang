@@ -1,4 +1,4 @@
-package lam.fpoly.shopthoitrang.AccFragment;
+package lam.fpoly.shopthoitrang.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -23,7 +23,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
+import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.R;
 
@@ -31,7 +33,7 @@ import lam.fpoly.shopthoitrang.R;
 public class ThongTinFragment extends Fragment {
 
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
-    LinearLayout user_edit,user_donhang;
+    LinearLayout user_edit,idDangXuat;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
@@ -48,7 +50,7 @@ public class ThongTinFragment extends Fragment {
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
-        user_donhang = view.findViewById(R.id.user_donhang);
+        idDangXuat = view.findViewById(R.id.idDangXuat);
         khDao = new TbKhachHangDao();
         context = getActivity();
         id = DangNhapActivity.ID;
@@ -59,13 +61,26 @@ public class ThongTinFragment extends Fragment {
                 openDialog();
             }
         });
-        user_donhang.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+        //dangxuat
+        idDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,QuanLyDonHang.class);
-                startActivity(intent);
+                user_tendangnhap.setText("");
+                user_ten.setText("");
+                user_diachi.setText("");
+                user_sdt.setText("");
+                MainActivity.checkLogin = false;
+                Intent intent = new Intent(getActivity(),DangNhapActivity.class);
+                getActivity().startActivity(intent);
             }
         });
+
+
+
         return view;
     }
     private void openDialog(){

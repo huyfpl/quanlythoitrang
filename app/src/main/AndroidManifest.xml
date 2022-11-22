@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -15,11 +16,19 @@
         android:theme="@style/Theme.ShopThoiTrang"
         tools:targetApi="31">
         <activity
+            android:name=".ActivitySanPham.DonMua_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".manhinhcho.manhinhcho"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,16 +38,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".AccFragment.DangKyActivity"/>
-        <activity android:name=".AccFragment.DangNhapActivity"/>
-        <activity android:name=".AccFragment.QuanLyDonHang"/>
-        <activity android:name=".AccFragment.HoaDonChiTiet"/>
+        <activity android:name=".AccFragment.DangKyActivity" />
+        <activity android:name=".AccFragment.DangNhapActivity" />
+        <activity android:name=".ActivitySanPham.Activity_ThongTinSP" />
+        <activity android:name=".ActivitySanPham.HoaDonChiTiet" />
 
         <meta-data
             android:name="preloaded_fonts"

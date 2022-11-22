@@ -25,47 +25,37 @@ import lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.Model.TbDanhMuc;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_DM;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
 import lam.fpoly.shopthoitrang.R;
 
 
 public class Create_Fragment extends Fragment {
-    public static GridView idGridView;
-    public static TbSanPhamDao sanPhamDao;
-    public static MyAdapter_GirdView myAdapterGirdView;
-    public static List<TbSanPham> list;
-    public static TbDanhMucDao danhMucDao;
-    public static int id;
+    public GridView idGridView;
+    public MyAdapter_GirdView myAdapterGirdView;
+    public List<TbSanPham> list;
+    public int id = 1;
     private View view;
-    public static Context context;
+    public Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_create_, container, false);
-        idGridView = view.findViewById(R.id.idGridView);
-        context = view.getContext();
         return view;
     }
 
-//    public void ReceiveData(String data){
-//        danhMucDao = new TbDanhMucDao();
-//        sanPhamDao = new TbSanPhamDao();
-//        id = danhMucDao.getID(data);
-//        Log.i("TAG", "ReceiveData: "+data);
-//        list = new ArrayList<>();
-//        list = sanPhamDao.getSpDanhMuc(id);
-//        myAdapterGirdView = new MyAdapter_GirdView(getContext(),list);
-//        idGridView.setAdapter(myAdapterGirdView);
-//    }
-
-    public static void setGirdView(String data){
-        danhMucDao = new TbDanhMucDao();
-        sanPhamDao = new TbSanPhamDao();
-        id = danhMucDao.getID(data);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        idGridView = view.findViewById(R.id.idGridView);
+        context = view.getContext();
         list = new ArrayList<>();
-        list = sanPhamDao.getSpDanhMuc(id);
-        myAdapterGirdView = new MyAdapter_GirdView(context,list);
+
+        list = MyDataBase_SP.getInstance(getActivity()).sanPhamDAO().getDataID(3);
+
+        myAdapterGirdView = new MyAdapter_GirdView(context,list,R.layout.layouitem_danhmuc);
         idGridView.setAdapter(myAdapterGirdView);
     }
 

@@ -1,266 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".AccFragment.HoaDonChiTiet">
+    tools:context=".ActivitySanPham.HoaDonChiTiet">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"
-        android:text="Thông tin khách hàng"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="220dp"
-        app:cardCornerRadius="20dp">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_marginStart="15dp"
-            android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Họ và tên"/>
-            <TextView
-                android:id="@+id/hdct_hoten"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="10dp"
-                android:text="Nguyễn Văn A"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Số điện thoại"/>
-            <TextView
-                android:id="@+id/hdct_sdt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="10dp"
-                android:text="0123456789"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa chỉ"/>
-            <TextView
-                android:id="@+id/hdct_diachi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="10dp"
-                android:text="Hà Nội"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Trạng thái đơn hàng"/>
-            <TextView
-                android:id="@+id/hdct_trangthai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:text="Đang giao hàng"/>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/hdct_anh_item"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="25dp"
-                android:src="@mipmap/ic_launcher"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/hdct_tensp_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Bomber jacket"/>
-                <TextView
-                    android:id="@+id/hdct_gia_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#F44336"
-                    android:text="299.000đ"/>
-
-            </LinearLayout>
-
             <androidx.cardview.widget.CardView
-                android:layout_width="70dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="35dp"
-                app:cardCornerRadius="20dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="5dp">
 
-                <TextView
-                    android:id="@+id/hdct_soluong_item"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#CCCBCB"
-                    android:textAlignment="center"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="1"/>
+                    android:layout_height="wrap_content"
+                    android:background="#E8B4B8"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#0A000000"
+                android:layout_height="20dp"/>
+
+            <FrameLayout
+                android:id="@+id/idClickEdit_ThongTin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Địa chỉ nhận hàng"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/cabin_medium"
+                        android:textSize="18dp"
+                        android:textColor="#D8000000" />
+
+                    <TextView
+                        android:id="@+id/tvName_HDCT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/cabin"
+                        android:text="tên người nhận"/>
+
+                    <TextView
+                        android:id="@+id/tvSDT_HDCT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/cabin"
+                        android:text="0123456789"/>
+
+                    <TextView
+                        android:id="@+id/tvDiaChi_HDCT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/cabin"
+                        android:text="Gia Lâm , Hà Nội"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_gravity="bottom"
+                    android:id="@+id/idView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <ImageView
+                    android:layout_margin="15dp"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/library_edit"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#0A000000"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng tiền hàng"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/cabin_medium"
+                        android:textSize="18dp"
+                        android:textColor="#D8000000" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="4"
+                        android:id="@+id/tvTongTienHang_HDCT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="199000 $"
+                        android:textColor="#FF8D85"
+                        android:textStyle="bold"
+                        android:textSize="18dp"/>
+
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/idRcv_HDCT"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#0A000000"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/idSelectVoucher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:weightSum="10"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn voucher"
+                    android:fontFamily="@font/cabin"
+                    android:textSize="18dp"/>
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/keyboard_arrow_down"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#0A000000"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng tiền hàng"
+                        android:fontFamily="@font/cabin"
+                        android:textSize="18dp"/>
+
+                    <TextView
+                        android:id="@+id/tvTienHang_HDCT"
+                        android:textAlignment="textEnd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="1.000.000 đ"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Phí ship"
+                        android:fontFamily="@font/cabin"
+                        android:textSize="18dp"/>
+
+                    <TextView
+                        android:id="@+id/tvPhiShip_HDCT"
+                        android:textAlignment="textEnd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="50.000 đ"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Voucher giảm giá"
+                        android:fontFamily="@font/cabin"
+                        android:textSize="18dp"/>
+
+                    <TextView
+                        android:id="@+id/tvVoucher_HDCT"
+                        android:textAlignment="textEnd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="- 100.000 đ"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#0A000000"
+                android:layout_height="20dp"/>
+
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
 
 
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp">
+    <LinearLayout
+        android:background="@color/pink"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:weightSum="10"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_weight="5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:orientation="vertical">
+                android:text="Tổng thanh toán"
+                android:textAllCaps="true"
+                android:fontFamily="@font/noto_sans_bold"
+                android:textSize="18dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="19dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/black"
-                    android:text="Thanh toán"/>
-
-                <TextView
-                    android:id="@+id/hdct_tt_tensp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:text="aaaaaa x 2"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:text="Phí giao hàng"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:text="Tổng tiền"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvTongTienThanhToan"
+                android:textAlignment="textEnd"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"/>
-                <TextView
-                    android:id="@+id/hdct_tt_tienhang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:text="100.000đ"/>
-                <TextView
-                    android:id="@+id/hdct_tt_ship"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:text="34.000đ"/>
-                <TextView
-                    android:id="@+id/hdct_tt_tongtien"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:textColor="#F44336"
-                    android:text="632.000đ"/>
-
-            </LinearLayout>
+                android:layout_weight="5"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="950.000 đ"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tvDatHang_HDCT"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_dathang"
+            android:fontFamily="@font/noto_sans_bold"
+            android:gravity="center"
+            android:text="Đặt hàng"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
+    </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btnSave_hdct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Lưu"/>
-
-</LinearLayout>
+</FrameLayout>

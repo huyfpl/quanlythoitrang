@@ -22,16 +22,14 @@ public class TbHoaDonChiTietDao {
         List<TbHoaDonChiTiet> listCat = new ArrayList<TbHoaDonChiTiet>();
         try {
             if (this.objConn != null) {
-                String sqlQuery = "select kh.ten_khachHang as \"Hoten\", kh.sdt_khachHang as \"Sdt\", kh.diaChi\n" +
-                        "from khachHang kh, donHang dh\n" +
-                        "where kh.id_khachHang = dh.id_khachHang and id_donHang = "+id+"";
+                String sqlQuery = "SELECT * FROM chiTietHoaDon WHERE id_donHang = '"+id+"'";
                 Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
                 ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
                 while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
                     TbHoaDonChiTiet obj = new TbHoaDonChiTiet();
-                    obj.setHoten(resultSet.getString("hoten"));
-                    obj.setSdt(resultSet.getInt("sdt"));
-                    obj.setDiachi(resultSet.getString("diachi"));
+                    obj.setId_DonHang(resultSet.getInt("id_donHang"));
+                    obj.setId_SanPham(resultSet.getInt("id_sanPham"));
+                    obj.setSoLuong(resultSet.getInt("soLuong"));
                     listCat.add(obj);
                 }
             }

@@ -66,12 +66,13 @@ public class Activity_ThongTinSP extends AppCompatActivity {
                     TbGioHang tbGioHang = new TbGioHang(DangNhapActivity.ID,idSP,1);
                     if (tbGioHangDao.checkExist(tbGioHang)){
                         Log.i("TAG", "onClick: "+tbGioHangDao.checkExist(tbGioHang));
+                        tbGioHangDao.updateRow(tbGioHang);
                         tbGioHangDao.insertRow(tbGioHang);
                         Toast.makeText(Activity_ThongTinSP.this,"Đã thêm vào giỏ hàng",
                                 Toast.LENGTH_SHORT).show();
                     }else{
-                        Log.i("TAG", "onClick: "+tbGioHangDao.checkExist(tbGioHang));
-                        tbGioHangDao.updateRow(tbGioHang);
+                        Log.i("TAG", "onClick------------: "+tbGioHangDao.checkExist(tbGioHang));
+                        tbGioHangDao.insertRow(tbGioHang);
                         Toast.makeText(Activity_ThongTinSP.this,"Đã thêm vào giỏ hàng",
                                 Toast.LENGTH_SHORT).show();
                     }

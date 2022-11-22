@@ -32,7 +32,6 @@ public class HoaDonChiTiet extends AppCompatActivity {
         hdct_hoten = findViewById(R.id.hdct_hoten);
         hdct_sdt = findViewById(R.id.hdct_sdt);
         hdct_diachi = findViewById(R.id.hdct_diachi);
-        hdct_trangthai = findViewById(R.id.hdct_trangthai);
         hdct_tensp_item = findViewById(R.id.hdct_tensp_item);
         hdct_gia_item = findViewById(R.id.hdct_gia_item);
         hdct_soluong_item = findViewById(R.id.hdct_soluong_item);

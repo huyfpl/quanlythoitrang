@@ -13,7 +13,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
-import lam.fpoly.shopthoitrang.AccFragment.ThongTinFragment;
+import lam.fpoly.shopthoitrang.Fragment.ThongTinFragment;
 import lam.fpoly.shopthoitrang.Dao.TbDanhMucDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.Fragment.DanhMuc_Fragment;
@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
         frame = R.id.flFragment;
 
         //dang nhap to main
-        Intent intent = getIntent();
-        int values = intent.getIntExtra("ID_ACC",1);
-        if(values == ID_ACC){
+        if(checkLogin){
             replaceFragment(new ThongTinFragment());
         }else{
             replaceFragment(new Home_Fragment());
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        if(values == ID_ACC){
+        if(checkLogin){
             bottomNav.show(ID_ACC,true);
         }else{
             bottomNav.show(ID_HOME,true);
@@ -179,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
         MyDataBase_Temporary.getInstance(this).donHangDAO().delete();
         super.onDestroy();
     }
+
+
 
     //animation dưới lên
 //    ObjectAnimator anim = ObjectAnimator.ofFloat(imgLogo,"translationY",0,-1000f);

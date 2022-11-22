@@ -1,8 +1,9 @@
-package lam.fpoly.shopthoitrang.AccFragment;
+package lam.fpoly.shopthoitrang.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
 import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
@@ -72,6 +74,8 @@ public class ThongTinFragment extends Fragment {
                 user_diachi.setText("");
                 user_sdt.setText("");
                 MainActivity.checkLogin = false;
+                Intent intent = new Intent(getActivity(),DangNhapActivity.class);
+                getActivity().startActivity(intent);
             }
         });
 

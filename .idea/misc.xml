@@ -6,10 +6,15 @@
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/bg_bogoc.xml" value="0.1" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/ic_baseline_edit_24.xml" value="0.1195" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1195" />
+        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_quan_ly_don_hang.xml" value="0.15172101449275363" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" value="0.1" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_acc.xml" value="0.1" />
+        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_danh_muc.xml" value="0.15172101449275363" />
+        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_thong_tin.xml" value="0.1" />
+        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layouitem_danhmuc.xml" value="0.15172101449275363" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/sanpham_item.xml" value="0.15172101449275363" />
         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/them.xml" value="0.1" />
+        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/menu/menu_search.xml" value="0.184375" />
       </map>
     </option>
   </component>
@@ -19,12 +24,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5" />
-      </ProjectState>
-    </option>
   </component>
 </project>

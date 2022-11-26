@@ -2,6 +2,7 @@ package lam.fpoly.shopthoitrang.ActivitySanPham;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Adapter.HoaDonAdapter;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
+import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
 import lam.fpoly.shopthoitrang.Object.DonHang_Temorary;
@@ -87,11 +89,16 @@ public class HoaDonChiTiet extends AppCompatActivity {
     private void loadData(){
         Intent intent = getIntent();
         SP_ID = intent.getIntExtra("SP_ID",0);
+        Log.i("TAG11111111111111111111", "loadData: " + SP_ID);
         if (SP_ID == 0){
             list = MyDataBase_Temporary.getInstance(this).donHangDAO().getListData();
             hoaDonAdapter.setData(list);
         }else{
-            //list = MyDataBase_SP.getInstance(this).sanPhamDAO().getSP_ID(SP_ID);
+            TbSanPham tbSanPham = MyDataBase_SP.getInstance(this).sanPhamDAO().getDataIdSP(SP_ID);
+            list.add(new DonHang_Temorary(tbSanPham.getId(),tbSanPham.getId_sanPham(),
+                   tbSanPham.getTen_sanPham(),tbSanPham.getGiaBan(),
+                    tbSanPham.getSrcAnh(),1));
+            hoaDonAdapter.setData(list);
         }
     }
 

@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MyDataBase_Temporary.getInstance(this).donHangDAO().delete();
+
         downloadSanPhamLocal();
         downloadDanhMucLocal();
 

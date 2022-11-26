@@ -1,0 +1,119 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/bg_bogoc.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/ic_baseline_edit_24.xml\" value=\"0.1195\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/ic_baseline_edit_24.xml\" value=\"0.1195\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_acc.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/sanpham_item.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/them.xml\" value=\"0.1\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n  <component name=\"VisualizationToolProject\">\r\n    <option name=\"state\">\r\n      <ProjectState>\r\n        <option name=\"scale\" value=\"0.5\" />\r\n      </ProjectState>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 8732ac890befe473903a5c217309cf96825cc294)
++++ b/.idea/misc.xml	(date 1669006607428)
+@@ -6,10 +6,14 @@
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/bg_bogoc.xml" value="0.1" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/ic_baseline_edit_24.xml" value="0.1195" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1195" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_quan_ly_don_hang.xml" value="0.15172101449275363" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" value="0.1" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_acc.xml" value="0.1" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_danh_muc.xml" value="0.15172101449275363" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layouitem_danhmuc.xml" value="0.15172101449275363" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/sanpham_item.xml" value="0.15172101449275363" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/them.xml" value="0.1" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/menu/menu_search.xml" value="0.184375" />
+       </map>
+     </option>
+   </component>
+@@ -20,11 +24,4 @@
+   <component name="ProjectType">
+     <option name="id" value="Android" />
+   </component>
+-  <component name="VisualizationToolProject">
+-    <option name="state">
+-      <ProjectState>
+-        <option name="scale" value="0.5" />
+-      </ProjectState>
+-    </option>
+-  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <targetSelectedWithDropDown>\r\n      <Target>\r\n        <type value=\"QUICK_BOOT_TARGET\" />\r\n        <deviceKey>\r\n          <Key>\r\n            <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n            <value value=\"C:\\Users\\HUY\\.android\\avd\\huy_mod.avd\" />\r\n          </Key>\r\n        </deviceKey>\r\n      </Target>\r\n    </targetSelectedWithDropDown>\r\n    <timeTargetWasSelectedWithDropDown value=\"2022-11-19T13:27:52.713807Z\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	(revision 8732ac890befe473903a5c217309cf96825cc294)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1668950634983)
+@@ -7,11 +7,11 @@
+         <deviceKey>
+           <Key>
+             <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\HUY\.android\avd\huy_mod.avd" />
++            <value value="C:\Users\a\.android\avd\Pixel_4_API_32.avd" />
+           </Key>
+         </deviceKey>
+       </Target>
+     </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-11-19T13:27:52.713807Z" />
++    <timeTargetWasSelectedWithDropDown value="2022-11-19T20:25:56.458341400Z" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nplugins {\r\n    id 'com.android.application' version '7.3.1' apply false\r\n    id 'com.android.library' version '7.3.1' apply false\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 8732ac890befe473903a5c217309cf96825cc294)
++++ b/build.gradle	(date 1668950749072)
+@@ -1,5 +1,5 @@
+ // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ plugins {
+-    id 'com.android.application' version '7.3.1' apply false
+-    id 'com.android.library' version '7.3.1' apply false
++    id 'com.android.application' version '7.2.0' apply false
++    id 'com.android.library' version '7.2.0' apply false
+ }
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    namespace 'lam.fpoly.shopthoitrang'\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"lam.fpoly.shopthoitrang\"\r\n        minSdk 21\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    implementation 'com.google.android.material:material:1.7.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.4'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'\r\n    implementation files('libs\\\\jtds-1.3.1.jar')\r\n    implementation 'com.squareup.picasso:picasso:2.71828';\r\n    //img\r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n    //ảnh tròn\r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n    implementation 'com.github.bumptech.glide:glide:4.10.0'\r\n    //add\r\n    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'\r\n   //lottile\r\n    def lottieVersion = \"3.4.0\"\r\n    implementation \"com.airbnb.android:lottie:$lottieVersion\"\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 8732ac890befe473903a5c217309cf96825cc294)
++++ b/app/build.gradle	(date 1669005062469)
+@@ -41,7 +41,6 @@
+     //img
+     implementation 'de.hdodenhof:circleimageview:3.1.0'
+     //ảnh tròn
+-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+     implementation 'com.github.bumptech.glide:glide:4.10.0'
+     //add
+     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+Index: app/src/main/res/layout/activity_quan_ly_don_hang.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".QuanLyDonHang\">\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/rsv_dh\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_quan_ly_don_hang.xml b/app/src/main/res/layout/activity_quan_ly_don_hang.xml
+--- a/app/src/main/res/layout/activity_quan_ly_don_hang.xml	(revision 8732ac890befe473903a5c217309cf96825cc294)
++++ b/app/src/main/res/layout/activity_quan_ly_don_hang.xml	(date 1669000552269)
+@@ -5,7 +5,7 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    tools:context=".QuanLyDonHang">
++    tools:context=".AccFragment.QuanLyDonHang">
+ 
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/rsv_dh"

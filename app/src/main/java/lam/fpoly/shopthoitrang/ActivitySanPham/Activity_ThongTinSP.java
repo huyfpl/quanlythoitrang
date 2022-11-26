@@ -47,7 +47,6 @@ public class Activity_ThongTinSP extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (MainActivity.checkLogin){
-                    System.out.println(idSP);
                     Intent intent = new Intent(Activity_ThongTinSP.this,HoaDonChiTiet.class);
                     intent.putExtra("SP_ID",idSP);
                     startActivity(intent);

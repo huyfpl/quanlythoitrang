@@ -73,7 +73,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         }
 
         holder.tvName_SanPham.setText(tbSanPham.getTen_sanPham());
-        holder.tvGia_SanPham.setText(String.valueOf(tbSanPham.getGiaBan()));
+        holder.tvGia_SanPham.setText(tbSanPham.getGiaBan()+".000đ");
         Picasso.get().load(tbSanPham.getSrcAnh()).fit().into(holder.imgSanPham);
 
         holder.imgItemCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -2,7 +2,6 @@ package lam.fpoly.shopthoitrang.Model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity(tableName = "danhmuc")
 public class TbDanhMuc {
     @PrimaryKey(autoGenerate = true)

@@ -31,12 +31,14 @@ import lam.fpoly.shopthoitrang.R;
 
 
 public class Create_Fragment extends Fragment {
-    public GridView idGridView;
-    public MyAdapter_GirdView myAdapterGirdView;
-    public List<TbSanPham> list;
-    public int id = 1;
+    public static GridView idGridView;
+    public static MyAdapter_GirdView myAdapterGirdView;
+    public static List<TbSanPham> list;
+    public static int id;
     private View view;
-    public Context context;
+    public static Context context;
+
+    public static int ID_DM = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,11 +54,13 @@ public class Create_Fragment extends Fragment {
         idGridView = view.findViewById(R.id.idGridView);
         context = view.getContext();
         list = new ArrayList<>();
+    }
 
-        list = MyDataBase_SP.getInstance(getActivity()).sanPhamDAO().getDataID(3);
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        list = MyDataBase_SP.getInstance(getActivity()).sanPhamDAO().getDataID(ID_DM);
         myAdapterGirdView = new MyAdapter_GirdView(context,list,R.layout.layouitem_danhmuc);
         idGridView.setAdapter(myAdapterGirdView);
     }
-
 }

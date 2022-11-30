@@ -158,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
             TbSanPham tbSanPham = new TbSanPham(idSp,tenSP,anhSP,giaNhapSP,giaBanSP,tonKho,danhMuc);
             MyDataBase_SP.getInstance(this).sanPhamDAO().insertData(tbSanPham);
         }
-        Log.i("HoatDong1111111111", "downloadSanPhamLocal: download xong: "+list.size());
     }
 
     private void downloadDanhMucLocal(){
@@ -171,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
             TbDanhMuc tbDanhMuc = new TbDanhMuc(idDM,tenDM);
             MyDataBase_DM.getInstance(this).danhMucDAO().insertData(tbDanhMuc);
         }
-        Log.i("HoatDong1111111111", "downloadDanhMucLocal: download xong: "+list.size());
     }
 
     @Override

@@ -35,6 +35,7 @@ public class TbDonHangDao {
                     obj.setTrangThai(resultSet.getString("trangThai"));
                     obj.setNgayMua(resultSet.getString("ngayMua"));
                     obj.setTongTien(resultSet.getInt("tongtien"));
+//                    obj.setSlg();
                     list.add(obj);
                 }
             }

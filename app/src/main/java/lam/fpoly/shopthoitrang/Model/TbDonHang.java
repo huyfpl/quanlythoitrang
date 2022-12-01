@@ -7,6 +7,16 @@ public class TbDonHang {
     String ngayMua;
     int tongTien;
 
+    int slg;
+
+    public int getSlg() {
+        return slg;
+    }
+
+    public void setSlg(int slg) {
+        this.slg = slg;
+    }
+
     public TbDonHang() {
     }
 

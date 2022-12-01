@@ -41,7 +41,6 @@ public class manhinhcho extends AppCompatActivity {
 
     }
     public void load(){
-
         manhinhchao.startAnimation(AnimationUtils.loadAnimation(this,R.anim.manloading));
     }
 

@@ -33,7 +33,7 @@ import lam.fpoly.shopthoitrang.R;
 public class ThongTinFragment extends Fragment {
 
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
-    LinearLayout user_edit,idDangXuat;
+    LinearLayout user_edit,user_donhang,idDangXuat;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
@@ -50,6 +50,7 @@ public class ThongTinFragment extends Fragment {
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
+        user_donhang = view.findViewById(R.id.user_donhang);
         idDangXuat = view.findViewById(R.id.idDangXuat);
         khDao = new TbKhachHangDao();
         context = getActivity();
@@ -62,7 +63,12 @@ public class ThongTinFragment extends Fragment {
             }
         });
 
+        user_donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
 
         //dangxuat

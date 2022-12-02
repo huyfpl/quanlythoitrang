@@ -43,22 +43,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MyDataBase_Temporary.getInstance(this).donHangDAO().delete();
-
         downloadSanPhamLocal();
         downloadDanhMucLocal();
-
         bottomNav = findViewById(R.id.bottomNav);
         frame = R.id.flFragment;
-
         //dang nhap to main
         if(checkLogin){
             replaceFragment(new ThongTinFragment());
         }else{
             replaceFragment(new Home_Fragment());
         }
-
-
-
         bottomNav.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_heart_fill));
         bottomNav.add(new MeowBottomNavigation.Model(ID_DANHMUC,R.drawable.category));
         bottomNav.add(new MeowBottomNavigation.Model(ID_GIOHANG,R.drawable.shopping_cart));

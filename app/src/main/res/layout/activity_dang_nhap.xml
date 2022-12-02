@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="#FC7A96"
     android:orientation="vertical"
-    tools:context=".AccFragment.DangNhapActivity">
+    tools:context=".AccFragment.DangNhapActivity"
+    android:id="@+id/check"
+    >
 
    <FrameLayout
        android:layout_width="match_parent"

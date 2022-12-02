@@ -40,6 +40,7 @@ public class Home_Fragment extends Fragment {
     }
 
     public void ScrollTab(View view){
+
         idTabHome = view.findViewById(R.id.idTabHome);
         idViewHome = view.findViewById(R.id.idViewHome);
         ViewPagerAdapterHome adapter = new ViewPagerAdapterHome(getActivity());

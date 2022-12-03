@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
@@ -37,8 +41,8 @@ public class ThongTinFragment extends Fragment {
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
+    public static  boolean clear=false;
     int id;
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +84,9 @@ public class ThongTinFragment extends Fragment {
                 user_diachi.setText("");
                 user_sdt.setText("");
                 MainActivity.checkLogin = false;
-                Intent intent = new Intent(getActivity(),DangNhapActivity.class);
+                DangNhapActivity.sharedPreferences.edit().clear().commit();
+                clear = true;
+                Intent intent = new Intent(getActivity(),MainActivity.class);
                 getActivity().startActivity(intent);
             }
         });

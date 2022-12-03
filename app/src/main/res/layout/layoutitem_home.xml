@@ -7,14 +7,14 @@
     
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="230dp"
         app:cardCornerRadius="30dp">
 
         <ImageView
             android:id="@+id/item_Img"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="230dp"
             android:src="@drawable/bomber"/>
 
    </androidx.cardview.widget.CardView>
@@ -38,15 +38,30 @@
                 android:layout_height="wrap_content"
                 android:text="Tên áo"
                 android:textSize="16dp"
-                android:textColor="#1E355C"/>
-
+                android:textColor="#1E355C"
+                android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_marginRight="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/underline"
+                android:textSize="15dp"
+                android:textColor="#FF0000"/>
             <TextView
                 android:id="@+id/tvSpPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="299000"
-                android:textSize="12dp"
-                android:textColor="#A5AEBD"/>
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="#E83D0A"/>
+        </LinearLayout>
+
 
         </LinearLayout>
 

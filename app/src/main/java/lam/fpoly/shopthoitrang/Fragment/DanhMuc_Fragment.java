@@ -110,9 +110,8 @@ public class DanhMuc_Fragment extends Fragment {
         idTabDanhMuc.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                Create_Fragment.ID_DM = tab.getPosition()+1;
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
@@ -120,6 +119,7 @@ public class DanhMuc_Fragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                Create_Fragment.ID_DM = tab.getPosition()+1;
             }
         });
     }

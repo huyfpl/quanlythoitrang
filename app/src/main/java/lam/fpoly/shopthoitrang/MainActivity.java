@@ -43,22 +43,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MyDataBase_Temporary.getInstance(this).donHangDAO().delete();
-
         downloadSanPhamLocal();
         downloadDanhMucLocal();
-
         bottomNav = findViewById(R.id.bottomNav);
         frame = R.id.flFragment;
-
         //dang nhap to main
         if(checkLogin){
             replaceFragment(new ThongTinFragment());
         }else{
             replaceFragment(new Home_Fragment());
         }
-
-
-
         bottomNav.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.home_heart_fill));
         bottomNav.add(new MeowBottomNavigation.Model(ID_DANHMUC,R.drawable.category));
         bottomNav.add(new MeowBottomNavigation.Model(ID_GIOHANG,R.drawable.shopping_cart));
@@ -158,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
             TbSanPham tbSanPham = new TbSanPham(idSp,tenSP,anhSP,giaNhapSP,giaBanSP,tonKho,danhMuc);
             MyDataBase_SP.getInstance(this).sanPhamDAO().insertData(tbSanPham);
         }
-        Log.i("HoatDong1111111111", "downloadSanPhamLocal: download xong: "+list.size());
     }
 
     private void downloadDanhMucLocal(){
@@ -171,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
             TbDanhMuc tbDanhMuc = new TbDanhMuc(idDM,tenDM);
             MyDataBase_DM.getInstance(this).danhMucDAO().insertData(tbDanhMuc);
         }
-        Log.i("HoatDong1111111111", "downloadDanhMucLocal: download xong: "+list.size());
     }
 
     @Override

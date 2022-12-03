@@ -1,7 +1,7 @@
 package lam.fpoly.shopthoitrang.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
+import lam.fpoly.shopthoitrang.Fragment.GioHang_Fragment;
 import lam.fpoly.shopthoitrang.Model.TbGioHang;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
@@ -32,7 +32,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
     private List<TbGioHang> list;
     private List<TbSanPham> listSP;
     int number = 1;
-
     public void setData(List<TbGioHang> mlist){
         this.list = mlist;
         notifyDataSetChanged();
@@ -64,6 +63,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         if (obj == null){
             return;
         }
+
+
         TbSanPhamDao sanPhamDao = new TbSanPhamDao();
         TbGioHangDao tbGioHangDao = new TbGioHangDao();
 
@@ -71,6 +72,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         if (tbSanPham == null){
             return;
         }
+        if (GioHang_Fragment.checkAll){
+            holder.imgItemCheck.setChecked(true);
+        }else {
+            holder.imgItemCheck.setChecked(false);
+        }
+        holder.idLayoutTangGiam.setVisibility(View.VISIBLE);
+       // interClickItemData.clickCheck(tbSanPham,i,obj,checkall);
+
 
         holder.tvName_SanPham.setText(tbSanPham.getTen_sanPham());
         holder.tvGia_SanPham.setText(tbSanPham.getGiaBan()+".000đ");
@@ -82,12 +91,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                 interClickItemData.clickCheck(tbSanPham,i,obj,isChecked);
                 if (isChecked){
                     holder.idLayoutTangGiam.setVisibility(View.VISIBLE);
+                    Log.d("ccc", "onCheckedChanged: "+holder.imgItemCheck.isChecked());
                 }else {
                     holder.idLayoutTangGiam.setVisibility(View.GONE);
                 }
             }
         });
-
         holder.imgItemGiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +136,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
 
     }
 
+    public static void checkAll(){
+      //  checkall=true;
+
+    }
     @Override
     public int getItemCount() {
         if (list.size() != 0){
@@ -154,4 +167,5 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             context = itemView.getContext();
         }
     }
+
 }

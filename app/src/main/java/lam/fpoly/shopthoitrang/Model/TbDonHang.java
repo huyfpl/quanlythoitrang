@@ -18,6 +18,13 @@ public class TbDonHang {
         this.tongTien = tongTien;
     }
 
+    public TbDonHang(int id_KhachHang, String trangThai, String ngayMua, int tongTien) {
+        this.id_KhachHang = id_KhachHang;
+        this.trangThai = trangThai;
+        this.ngayMua = ngayMua;
+        this.tongTien = tongTien;
+    }
+
     public int getId_DonHang() {
         return id_DonHang;
     }

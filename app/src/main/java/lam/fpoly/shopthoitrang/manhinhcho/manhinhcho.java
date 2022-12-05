@@ -11,10 +11,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbLogoDao;
@@ -27,11 +32,15 @@ public class manhinhcho extends AppCompatActivity {
     LinearLayout manhinhchao;
     LottieAnimationView loadingmanhinhchao;
     TbLogoDao tbLogoDao;
+    TextView clock;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manhinhcho);
-
+        clock=findViewById(R.id.clock);
+        DateFormat df = new SimpleDateFormat("hh:mm a");
+        String date = df.format(Calendar.getInstance().getTime());
+        clock.setText(date);
         tbLogoDao=new TbLogoDao();
         manhinhchao=findViewById(R.id.manhinhchao);
         loadingmanhinhchao=findViewById(R.id.loadingmanhinhchao);

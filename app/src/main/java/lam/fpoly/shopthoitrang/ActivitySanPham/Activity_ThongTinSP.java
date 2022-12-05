@@ -28,7 +28,7 @@ public class Activity_ThongTinSP extends AppCompatActivity {
     LinearLayout idGioHang_CT;
     int idSP;
     TbSanPham tbSanPham;
-
+  ImageView back;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -40,7 +40,13 @@ public class Activity_ThongTinSP extends AppCompatActivity {
         tvPriceSP_CT = findViewById(R.id.tvPriceSP_CT);
         idMuaNgay_CT = findViewById(R.id.idMuaNgay_CT);
         idGioHang_CT = findViewById(R.id.idGioHang_CT);
-
+   back=findViewById(R.id.backarrow);
+   back.setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View v) {
+           finish();
+       }
+   });
         loadDataSP();
 
         idMuaNgay_CT.setOnClickListener(new View.OnClickListener() {

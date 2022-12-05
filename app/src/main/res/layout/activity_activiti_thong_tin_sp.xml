@@ -7,11 +7,13 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+           >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -21,21 +23,15 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="5dp">
+                    app:cardCornerRadius="5dp"
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-                    <View
-                        android:layout_gravity="bottom"
-                        android:id="@+id/idView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="#B3A38B8B" />
+                   >
+                   <ImageView
+                       android:layout_margin="5dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/backarrow"
+                       android:id="@+id/backarrow"/>
                 </androidx.cardview.widget.CardView>
 
                 <FrameLayout

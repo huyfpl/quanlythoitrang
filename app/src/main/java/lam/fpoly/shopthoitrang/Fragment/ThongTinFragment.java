@@ -90,9 +90,6 @@ public class ThongTinFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
-
-
-
         return view;
     }
     private void openDialog(){

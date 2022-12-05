@@ -93,4 +93,7 @@ public class Activity_ThongTinSP extends AppCompatActivity {
         tvPriceSP_CT.setText(String.valueOf(tbSanPham.getGiaBan())+" $");
     }
 
+    public void backarrow(View view) {
+        finish();
+    }
 }

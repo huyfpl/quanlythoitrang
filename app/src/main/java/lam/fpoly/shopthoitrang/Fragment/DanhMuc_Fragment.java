@@ -82,7 +82,7 @@ public class DanhMuc_Fragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                Create_Fragment.myAdapterGirdView.getFilter().filter(newText.toString());
                 return false;
             }
         });
@@ -119,7 +119,7 @@ public class DanhMuc_Fragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                Create_Fragment.ID_DM = tab.getPosition()+1;
+
             }
         });
     }

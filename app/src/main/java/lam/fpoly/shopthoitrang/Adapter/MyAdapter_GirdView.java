@@ -3,6 +3,7 @@ package lam.fpoly.shopthoitrang.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.ActivitySanPham.Activity_ThongTinSP;
@@ -28,11 +30,14 @@ public class MyAdapter_GirdView extends BaseAdapter implements Filterable {
     private Context context;
     private List<TbSanPham> list = new ArrayList<>();
     private int layout;
+    private List<TbSanPham> listfull;
 
-    public MyAdapter_GirdView(Context context, List<TbSanPham> list, int layout) {
+    public MyAdapter_GirdView(Context context, List<TbSanPham> mlist, int layout) {
         this.context = context;
-        this.list = list;
+        this.list = mlist;
         this.layout = layout;
+        this.listfull = new ArrayList<>(list);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -105,6 +110,37 @@ public class MyAdapter_GirdView extends BaseAdapter implements Filterable {
 
     @Override
     public Filter getFilter() {
-        return null;
+        return FilterTensp;
     }
+    private Filter FilterTensp = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String searchTensp = constraint.toString().toLowerCase();
+            List<TbSanPham> templist = new ArrayList<>();
+            if (searchTensp.length() == 0 || searchTensp.isEmpty()) {
+                templist.addAll(listfull);
+
+            } else {
+                for (TbSanPham item : listfull
+                ) {
+                    if (item.getTen_sanPham().toLowerCase().contains(searchTensp)) {
+                        templist.add(item);
+                        Log.d("zzzz", "performFiltering: "+item.getTen_sanPham());
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = templist;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((Collection<? extends TbSanPham>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

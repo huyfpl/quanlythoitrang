@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class GioHang_Fragment extends Fragment {
     DonHang_Temorary donHang;
     int tienHang = 0;
 
+    public static boolean checkAll = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +66,17 @@ public class GioHang_Fragment extends Fragment {
         tvTongTien_GH = view.findViewById(R.id.tvTongTien_GH);
 
         tbGioHangDao = new TbGioHangDao();
-
+        imgCheckBox_GH.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                loadData();
+                if (isChecked){
+                    checkAll = true;
+                }else {
+                    checkAll = false;
+                }
+            }
+        });
         gioHangAdapter = new GioHangAdapter(new GioHangAdapter.InterClickItemData() {
             @Override
             public void clickCheck(TbSanPham tbSanPham, int position, TbGioHang tbGioHang, boolean isCheck) {

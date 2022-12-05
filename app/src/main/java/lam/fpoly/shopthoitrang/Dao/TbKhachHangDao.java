@@ -49,7 +49,6 @@ public class TbKhachHangDao {
 
     public int getID(String userName){
         int id = 0;
-        List<TbKhachHang> listCat = new ArrayList<TbKhachHang>();
         try {
             if (this.objConn != null) {
                 String sqlQuery = "SELECT * FROM khachHang WHERE userName = '"+userName+"'";

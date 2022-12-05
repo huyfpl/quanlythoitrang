@@ -45,13 +45,37 @@ public class TbDonHangDao {
         return list;
     }
 
+    public List<TbDonHang> getTrangThai(String value , int idKh) {
+        List<TbDonHang> list = new ArrayList<>();
+        try {
+            if (this.objConn != null) {
+                String sqlQuery = "SELECT * FROM donHang where trangThai = N'"+value+"' and id_khachHang = '"+idKh+"'";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    TbDonHang obj = new TbDonHang();
+                    obj.setId_DonHang(resultSet.getInt("id_donHang"));
+                    obj.setId_KhachHang(resultSet.getInt("id_khachHang"));
+                    obj.setTrangThai(resultSet.getString("trangThai"));
+                    obj.setNgayMua(resultSet.getString("ngayMua"));
+                    obj.setTongTien(resultSet.getInt("tongtien"));
+                    list.add(obj);
+                }
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "getTrangThai: lỗi");
+        }
+
+        return list;
+    }
+
 
     public void insertRow(TbDonHang objCat) {
         try {
             if (this.objConn != null) {
                 String insertSQL = "INSERT INTO donHang VALUES " +
                         "('"+objCat.getId_KhachHang()+"'," +
-                        "'"+objCat.getTrangThai()+"'," +
+                        "N'"+objCat.getTrangThai()+"'," +
                         "'"+objCat.getNgayMua()+"'," +
                         "'"+objCat.getTongTien()+"')";
                 String generatedColumns[] = {"ID"};
@@ -66,6 +90,23 @@ public class TbDonHangDao {
         } catch (Exception e) {
             Log.i("TAG", "insertRow: lỗi");
         }
+    }
+
+    public int getIdDonHang(){
+        int id = 0;
+        try {
+            if (this.objConn != null) {
+                String sqlQuery = "SELECT Max(id_donHang) as id FROM donHang";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    id = resultSet.getInt("id");
+                }
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "getIdDonHang: lỗi");
+        }
+        return id;
     }
 
 }

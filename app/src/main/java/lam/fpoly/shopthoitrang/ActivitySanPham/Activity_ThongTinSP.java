@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.ActivityDatHang.HoaDonChiTiet;
 import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbGioHang;
@@ -47,7 +48,7 @@ public class Activity_ThongTinSP extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (MainActivity.checkLogin){
-                    Intent intent = new Intent(Activity_ThongTinSP.this,HoaDonChiTiet.class);
+                    Intent intent = new Intent(Activity_ThongTinSP.this, HoaDonChiTiet.class);
                     intent.putExtra("SP_ID",idSP);
                     startActivity(intent);
                 }else{

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivitySanPham.HoaDonChiTiet">
+    tools:context=".ActivityDatHang.HoaDonChiTiet">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_weight="3"
+                        android:layout_weight="5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Tổng tiền hàng"
@@ -214,7 +214,7 @@
                         android:textAlignment="textEnd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="5"
                         android:fontFamily="@font/noto_sans"
                         android:text="1.000.000 đ"
                         android:textColor="@color/black"

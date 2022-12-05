@@ -1,22 +1,28 @@
-package lam.fpoly.shopthoitrang.ActivitySanPham;
+package lam.fpoly.shopthoitrang.ActivityDatHang;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Adapter.HoaDonAdapter;
+import lam.fpoly.shopthoitrang.Dao.TbDonHangDao;
+import lam.fpoly.shopthoitrang.Dao.TbHoaDonChiTietDao;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
+import lam.fpoly.shopthoitrang.Model.TbDonHang;
+import lam.fpoly.shopthoitrang.Model.TbHoaDonChiTiet;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
@@ -35,6 +41,8 @@ public class HoaDonChiTiet extends AppCompatActivity {
     int phiShip = 50000;
     int tienHang;
     int tongTien = 0;
+    String trangThai = "Chờ xác nhận";
+    SimpleDateFormat dateFormat =new SimpleDateFormat("MM/dd/yyyy");
 
 
     @Override
@@ -73,23 +81,35 @@ public class HoaDonChiTiet extends AppCompatActivity {
         idRcv_HDCT.setAdapter(hoaDonAdapter);
         loadData();
 
-        tvDatHang_HDCT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         thongTinGiaoHang();
         ship();
         tongTienHang();
         tvVoucher_HDCT.setText("- 0 đ");
 
+        tvDatHang_HDCT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TbDonHangDao tbDonHangDao = new TbDonHangDao();
+                TbDonHang tbDonHang = new TbDonHang(DangNhapActivity.ID,trangThai,dateFormat.format(new Date()),tongTien);
+                tbDonHangDao.insertRow(tbDonHang);
+
+                TbHoaDonChiTietDao tbHoaDonChiTietDao = new TbHoaDonChiTietDao();
+
+                for(int i = 0 ; i < list.size() ; i++){
+                    TbHoaDonChiTiet tbHoaDonChiTiet = new TbHoaDonChiTiet(tbDonHangDao.getIdDonHang(),
+                            list.get(i).getId_sanPham(),list.get(i).getSoLuong());
+                    tbHoaDonChiTietDao.insertRow(tbHoaDonChiTiet);
+                }
+
+                Intent intent = new Intent(HoaDonChiTiet.this,DatHangThanhCong.class);
+                startActivity(intent);
+            }
+        });
     }
+
     private void loadData(){
         Intent intent = getIntent();
         SP_ID = intent.getIntExtra("SP_ID",0);
-        Log.i("TAG11111111111111111111", "loadData: " + SP_ID);
         if (SP_ID == 0){
             list = MyDataBase_Temporary.getInstance(this).donHangDAO().getListData();
             hoaDonAdapter.setData(list);
@@ -100,6 +120,7 @@ public class HoaDonChiTiet extends AppCompatActivity {
                     tbSanPham.getSrcAnh(),1));
             hoaDonAdapter.setData(list);
         }
+
     }
 
     private void thongTinGiaoHang(){

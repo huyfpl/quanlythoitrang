@@ -37,7 +37,7 @@ public class Create_Fragment extends Fragment {
     public static int id;
     private View view;
     public static Context context;
-
+    private TextView soLuongSP;
     public static int ID_DM = 1;
 
     @Override
@@ -52,6 +52,7 @@ public class Create_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         idGridView = view.findViewById(R.id.idGridView);
+        soLuongSP = view.findViewById(R.id.soLuongSP);
         context = view.getContext();
         list = new ArrayList<>();
     }
@@ -62,5 +63,6 @@ public class Create_Fragment extends Fragment {
         list = MyDataBase_SP.getInstance(getActivity()).sanPhamDAO().getDataID(ID_DM);
         myAdapterGirdView = new MyAdapter_GirdView(context,list,R.layout.layouitem_danhmuc);
         idGridView.setAdapter(myAdapterGirdView);
+        soLuongSP.setText(list.size()+" sản phẩm");
     }
 }

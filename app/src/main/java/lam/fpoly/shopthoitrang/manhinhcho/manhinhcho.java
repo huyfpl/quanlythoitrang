@@ -24,7 +24,7 @@ import lam.fpoly.shopthoitrang.Model.TbLogo;
 import lam.fpoly.shopthoitrang.R;
 
 public class manhinhcho extends AppCompatActivity {
-    LinearLayout manhinhchao;
+    RelativeLayout manhinhchao;
     LottieAnimationView loadingmanhinhchao;
     TbLogoDao tbLogoDao;
     @Override

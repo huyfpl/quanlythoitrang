@@ -28,20 +28,14 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:id="@+id/soLuongSP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textStyle="bold"
                     android:textSize="20dp"/>
-
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sản phẩm"
-                    android:textStyle="bold"
-                    android:textSize="15dp"/>
 
             </LinearLayout>
 

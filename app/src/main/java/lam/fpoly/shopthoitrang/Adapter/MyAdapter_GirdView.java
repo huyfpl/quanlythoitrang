@@ -119,7 +119,6 @@ public class MyAdapter_GirdView extends BaseAdapter implements Filterable {
             List<TbSanPham> templist = new ArrayList<>();
             if (searchTensp.length() == 0 || searchTensp.isEmpty()) {
                 templist.addAll(listfull);
-
             } else {
                 for (TbSanPham item : listfull
                 ) {

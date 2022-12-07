@@ -1,6 +1,7 @@
 package lam.fpoly.shopthoitrang.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,9 +43,9 @@ public class DanhMuc_Fragment extends Fragment {
     private ViewPager2 pager_DanhMuc;
     Toolbar toolbar;
     //LottieAnimationView loading;
-    public static String NAME;
+    public static String NAME="";
     List<TbDanhMuc> getList;
-
+    Create_Fragment create_fragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,16 +75,35 @@ public class DanhMuc_Fragment extends Fragment {
 
         SearchView searchView= (SearchView)menu.findItem(R.id.search) .getActionView();
         searchView.setQueryHint("nhập sản phẩm cần tìm nhé....");
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // if ()
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String newText) {
+                if (!newText.isEmpty()){
+                    Create_Fragment.checkSearch = true;
+                    Create_Fragment.name_search = newText;
+                    return true;
+                }else {
+                    Create_Fragment.checkSearch = false;
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Create_Fragment.myAdapterGirdView.getFilter().filter(newText.toString());
-                return false;
+                if (!newText.isEmpty()){
+                    Create_Fragment.checkSearch = true;
+                    Create_Fragment.name_search = newText;
+                    return true;
+                }else {
+                    Create_Fragment.checkSearch = false;
+                }
+             return false;
             }
         });
         super.onCreateOptionsMenu(menu,inflater);
@@ -107,10 +127,12 @@ public class DanhMuc_Fragment extends Fragment {
                 tab.setText(getList.get(position).getTen_danhMuc()))).attach();
         idTabDanhMuc.setTabGravity(TabLayout.GRAVITY_CENTER);
         idTabDanhMuc.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         idTabDanhMuc.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Create_Fragment.ID_DM = tab.getPosition()+1;
+
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -123,5 +145,7 @@ public class DanhMuc_Fragment extends Fragment {
             }
         });
     }
+   public void run(int id){
 
+   }
 }

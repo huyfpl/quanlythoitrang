@@ -21,6 +21,8 @@ public interface SanPhamDAO {
     @Query("SELECT * FROM `tb.sanpham` WHERE id_danhmuc = :id")
     List<TbSanPham> getDataID(int id);
 
+    @Query("SELECT * FROM `tb.sanpham` WHERE ten_sanPham like '%' || :name || '%' and  id_danhmuc = :id")
+    List<TbSanPham> getDataname(String name,int id);
     @Query("SELECT * FROM `tb.sanpham` WHERE id_sanPham = :id")
     TbSanPham getDataIdSP(int id);
 

@@ -72,7 +72,32 @@ public class TbSanPhamDao {
 
         return list;
     }
+    public List<TbSanPham> getSpten(String tensp) {
+        List<TbSanPham> list = new ArrayList<TbSanPham>();
+        try {
+            if (this.objConn != null) {
+                String sqlQuery = "select * from sanPham sp, danhMuc dm\n" +
+                        "where ten_sanPham LIKE '%"+tensp+"%'";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    TbSanPham obj = new TbSanPham();
+                    obj.setId_sanPham(resultSet.getInt("id_sanpham"));
+                    obj.setTen_sanPham(resultSet.getString("ten_sanpham"));
+                    obj.setSrcAnh(resultSet.getString("anh"));
+                    obj.setGiaBan(resultSet.getInt("giaban"));
+                    obj.setGiaNhap(resultSet.getInt("gianhap"));
+                    obj.setTonKho(resultSet.getInt("tonkho"));
+                    obj.setId_danhmuc(resultSet.getInt("id_danhmuc"));
+                    list.add(obj);
+                }
+            }
+        } catch (Exception e) {
+            Log.i("TAG", "getSpDanhMuc: lỗi");
+        }
 
+        return list;
+    }
     public TbSanPham getSpID(int idSanPham) {
         TbSanPham tbSanPham = new TbSanPham();
         try {

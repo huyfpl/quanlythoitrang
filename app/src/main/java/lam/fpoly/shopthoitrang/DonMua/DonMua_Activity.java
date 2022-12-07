@@ -51,7 +51,6 @@ public class DonMua_Activity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                Create_Fragment.ID_DM = tab.getPosition()+1;
             }
         });
     }

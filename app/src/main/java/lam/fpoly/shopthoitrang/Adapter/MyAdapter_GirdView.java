@@ -3,6 +3,7 @@ package lam.fpoly.shopthoitrang.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
 
 import com.squareup.picasso.Picasso;
 
@@ -53,54 +56,67 @@ public class MyAdapter_GirdView extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         IconViewHolder viewHolder = null;
-        if(convertView == null){
+        if (convertView == null) {
             viewHolder = new IconViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(layout,null);
+            convertView = inflater.inflate(layout, null);
             viewHolder.itemImg = convertView.findViewById(R.id.item_Img);
             viewHolder.tvSpName = convertView.findViewById(R.id.tvSpName);
             viewHolder.tvSpPrice = convertView.findViewById(R.id.tvSpPrice);
             viewHolder.tvSale = convertView.findViewById(R.id.tv_sale);
             viewHolder.tvSpPrice_sale = convertView.findViewById(R.id.tvSpPrice_sale);
             viewHolder.layout_sale = convertView.findViewById(R.id.layout_sale);
-
+            viewHolder.layout_item = convertView.findViewById(R.id.layout_item);
             viewHolder.layout_sale.setVisibility(View.INVISIBLE);
             Picasso.get().load(list.get(position).getSrcAnh()).fit().into(viewHolder.itemImg);
             viewHolder.tvSpName.setText(list.get(position).getTen_sanPham());
             viewHolder.tvSpPrice.setText(list.get(position).getGiaBan() + ".000đ");
-
             //sale
             TbSaleSPDao tbSaleSPDao = new TbSaleSPDao();
             List<TbSaleSP> listSale = tbSaleSPDao.getAll();
-            for(TbSaleSP sp : listSale){
-                if(sp.getId_sanpham() == list.get(position).getId_sanPham()){
+            for (TbSaleSP sp : listSale) {
+                if (sp.getId_sanpham() == list.get(position).getId_sanPham()) {
                     viewHolder.layout_sale.setVisibility(View.VISIBLE);
-                    viewHolder.tvSale.setText(sp.getSale()+"%");
-                    viewHolder.tvSpPrice.setText(list.get(position).getGiaBan()*(100-sp.getSale())/100 + ".000đ");
-                    viewHolder.tvSpPrice_sale.setText(list.get(position).getGiaBan()+".000đ");
+                    viewHolder.tvSale.setText(sp.getSale() + "%");
+                    viewHolder.tvSpPrice.setText(list.get(position).getGiaBan() * (100 - sp.getSale()) / 100 + ".000đ");
+                    viewHolder.tvSpPrice_sale.setText(list.get(position).getGiaBan() + ".000đ");
                     viewHolder.tvSpPrice_sale.setPaintFlags(viewHolder.tvSpPrice_sale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                } else {
                 }
             }
+
+            viewHolder.layout_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TbSaleSPDao tbSaleSPDao = new TbSaleSPDao();
+                    List<TbSaleSP> listSale = tbSaleSPDao.getAll();
+                    for (TbSaleSP sp : listSale) {
+                        if (sp.getId_sanpham() == list.get(position).getId_sanPham()) {
+                            Activity_ThongTinSP.checkSale = true;
+                            break;
+                        } else {
+                            Activity_ThongTinSP.checkSale = false;
+                        }
+                    }
+                    Intent intent = new Intent(context, Activity_ThongTinSP.class);
+                    intent.putExtra("SP_VALUES", list.get(position).getId_sanPham());
+                    context.startActivity(intent);
+                }
+            });
+
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (IconViewHolder) convertView.getTag();
         }
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Activity_ThongTinSP.class);
-                intent.putExtra("SP_VALUES",list.get(position).getId_sanPham());
-                context.startActivity(intent);
-            }
-        });
         return convertView;
     }
 
-    public static class IconViewHolder{
-        private TextView tvSpName,tvSpPrice,tvSale, tvSpPrice_sale;
+    public static class IconViewHolder {
+        private TextView tvSpName, tvSpPrice, tvSale, tvSpPrice_sale;
         private ImageView itemImg;
         private LinearLayout layout_sale;
+        private CardView layout_item;
     }
 
     @Override

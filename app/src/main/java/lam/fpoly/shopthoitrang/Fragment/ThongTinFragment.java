@@ -22,8 +22,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,6 +35,8 @@ import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
 import lam.fpoly.shopthoitrang.DonMua.DonMua_Activity;
 import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
+import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
+import lam.fpoly.shopthoitrang.Object.DonHang_Temorary;
 import lam.fpoly.shopthoitrang.R;
 
 
@@ -42,6 +47,7 @@ public class ThongTinFragment extends Fragment {
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
+    ImageView imgAvatar;
     public static  boolean clear=false;
     int id;
     @SuppressLint("MissingInflatedId")
@@ -52,6 +58,7 @@ public class ThongTinFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_thong_tin, container, false);
         user_ten = view.findViewById(R.id.user_ten);
         user_tendangnhap = view.findViewById(R.id.user_tendangnhap);
+        imgAvatar = view.findViewById(R.id.imgAvatar);
         user_sdt = view.findViewById(R.id.user_sdt);
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
@@ -75,6 +82,7 @@ public class ThongTinFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
 
         //dangxuat
@@ -150,6 +158,7 @@ public class ThongTinFragment extends Fragment {
         user_tendangnhap.setText(kh.getUserName());
         user_sdt.setText(kh.getSdt_khachHang());
         user_diachi.setText(kh.getDiaChi());
+        Picasso.get().load(kh.getAvatar()).fit().into(imgAvatar);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

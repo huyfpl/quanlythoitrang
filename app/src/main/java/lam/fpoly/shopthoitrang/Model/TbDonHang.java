@@ -10,14 +10,6 @@ public class TbDonHang {
     public TbDonHang() {
     }
 
-    public TbDonHang(int id_DonHang, int id_KhachHang, String trangThai, String ngayMua, int tongTien) {
-        this.id_DonHang = id_DonHang;
-        this.id_KhachHang = id_KhachHang;
-        this.trangThai = trangThai;
-        this.ngayMua = ngayMua;
-        this.tongTien = tongTien;
-    }
-
     public TbDonHang(int id_KhachHang, String trangThai, String ngayMua, int tongTien) {
         this.id_KhachHang = id_KhachHang;
         this.trangThai = trangThai;

@@ -14,11 +14,12 @@ public class TbSanPham {
     int giaBan;
     int tonKho;
     int id_danhmuc;
+    String info;
 
     public TbSanPham() {
     }
 
-    public TbSanPham(int id_sanPham, String ten_sanPham, String srcAnh, int giaNhap, int giaBan, int tonKho, int id_danhmuc) {
+    public TbSanPham(int id_sanPham, String ten_sanPham, String srcAnh, int giaNhap, int giaBan, int tonKho, int id_danhmuc,String info) {
         this.id_sanPham = id_sanPham;
         this.ten_sanPham = ten_sanPham;
         this.srcAnh = srcAnh;
@@ -26,6 +27,15 @@ public class TbSanPham {
         this.giaBan = giaBan;
         this.tonKho = tonKho;
         this.id_danhmuc = id_danhmuc;
+        this.info = info;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getId() {

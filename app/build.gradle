@@ -56,7 +56,8 @@ dependencies {
 //    notification
 
     //konfetti
-    implementation 'nl.dionsegijn:konfetti-compose:2.0.2'
     implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+    implementation 'nl.dionsegijn:konfetti-compose:2.0.2'
+
 
 }

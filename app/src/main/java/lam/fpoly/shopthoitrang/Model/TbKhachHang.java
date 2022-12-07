@@ -7,6 +7,7 @@ public class TbKhachHang {
     String diaChi;
     String userName;
     String userPass;
+    String avatar;
 
     public TbKhachHang() {
     }
@@ -17,6 +18,14 @@ public class TbKhachHang {
         this.diaChi = diaChi;
         this.userName = user;
         this.userPass = pass;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getId_khachHang() {

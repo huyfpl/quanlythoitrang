@@ -62,8 +62,7 @@ public class DangNhapActivity extends AppCompatActivity {
         btnSignup = findViewById(R.id.btnSignUp);
 
         sharedPreferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-        checked=sharedPreferences.getBoolean("checked", Boolean.parseBoolean(""));
-        //Log.i("TAG", "onCreate checked: "+checked);
+        checked = sharedPreferences.getBoolean("checked", Boolean.parseBoolean(""));
 
 
         animlogin = findViewById(R.id.anim_login);
@@ -118,7 +117,7 @@ public class DangNhapActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 MainActivity.checkLogin = true;
-                                saveSharedPref(ID,true);
+                                saveSharedPref(ID, true);
                                 Intent intent = new Intent(context, MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -149,10 +148,8 @@ public class DangNhapActivity extends AppCompatActivity {
         } else {
             ID = sharedPreferences.getInt("idkh", 0);
             MainActivity.checkLogin = sharedPreferences.getBoolean("checked", Boolean.parseBoolean(""));
-            Log.i("TAG", "onCreate: " + MainActivity.checkLogin);
-
         }
-        if (checked){
+        if (checked) {
             MainActivity.checkLogin = true;
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);

@@ -40,44 +40,24 @@ public class TbSaleSPDao {
 
         return list;
     }
-    public void insertRow(TbSaleSP objCat) {
+
+    public int getGia_idsp(int idsp) {
+        int gia = 0;
         try {
             if (this.objConn != null) {
-                String insertSQL = "INSERT INTO saleSP VALUES (" +
-                        ""+objCat.getId_sanpham()+"," +
-                        ""+objCat.getSale()+")";
-                String generatedColumns[] = {"ID"};
-                PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
-                stmtInsert.execute();
+                String sqlQuery = "SELECT * FROM saleSP WHERE id_sanpham = "+idsp+"";
+                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
+                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
+                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
+                    gia = resultSet.getInt("sale");
+                }
             }
         } catch (Exception e) {
-            Log.i("TAG", "insertRow: lỗi");
+            Log.i("TAG", "getAll: lỗi");
         }
-    }
-    public void deleteRow(TbSaleSP objCat) {
-        try {
-            if (this.objConn != null) {
-                String insertSQL = "DELETE FROM saleSP WHERE id_sanPham = "+objCat.getId_sanpham()+"";
-                String generatedColumns[] = {"ID"};
-                PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
-                stmtInsert.execute();
-            }
-        } catch (Exception e) {
-            Log.i("TAG", "insertRow: lỗi");
-        }
+
+        return gia;
     }
 
-    public void updateRow(TbSaleSP objCat) {
-        try {
-            if (this.objConn != null) {
-                String insertSQL = "UPDATE saleSP SET sale = "+objCat.getSale()+" WHERE id_sanPham = "+objCat.getId_sanpham()+"";
-                String generatedColumns[] = {"ID"};
-                PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
-                stmtInsert.execute();
-            }
-        } catch (Exception e) {
-            Log.i("TAG", "insertRow: lỗi");
-        }
-    }
 
 }

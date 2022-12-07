@@ -1,0 +1,546 @@
+Index: app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lam.fpoly.shopthoitrang.ActivitySanPham;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\nimport android.graphics.Paint;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;\r\nimport lam.fpoly.shopthoitrang.ActivityDatHang.HoaDonChiTiet;\r\nimport lam.fpoly.shopthoitrang.Dao.TbGioHangDao;\r\nimport lam.fpoly.shopthoitrang.Dao.TbHoaDonChiTietDao;\r\nimport lam.fpoly.shopthoitrang.Dao.TbSaleSPDao;\r\nimport lam.fpoly.shopthoitrang.MainActivity;\r\nimport lam.fpoly.shopthoitrang.Model.TbGioHang;\r\nimport lam.fpoly.shopthoitrang.Model.TbSanPham;\r\nimport lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;\r\nimport lam.fpoly.shopthoitrang.R;\r\n\r\npublic class Activity_ThongTinSP extends AppCompatActivity {\r\n    ImageView imgSanPham_CT,imgBack_CT;\r\n    TextView tvNameSP_CT,tvPriceSP_CT,idMuaNgay_CT,tvPriceSP_CT_sale,tvInfo;\r\n    LinearLayout idGioHang_CT;\r\n    int idSP;\r\n    TbSanPham tbSanPham;\r\n    TbSaleSPDao tbSaleSPDao;\r\n    public static boolean checkSale = false;\r\n    @SuppressLint({\"MissingInflatedId\", \"WrongViewCast\"})\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_activiti_thong_tin_sp);\r\n        imgSanPham_CT = findViewById(R.id.imgSanPham_CT);\r\n        tvNameSP_CT = findViewById(R.id.tvNameSP_CT);\r\n        tvPriceSP_CT = findViewById(R.id.tvPriceSP_CT);\r\n        idMuaNgay_CT = findViewById(R.id.idMuaNgay_CT);\r\n        idGioHang_CT = findViewById(R.id.idGioHang_CT);\r\n        tvPriceSP_CT_sale = findViewById(R.id.tvPriceSP_CT_sale);\r\n        tvInfo = findViewById(R.id.tvInfo);\r\n        imgBack_CT = findViewById(R.id.imgBack_CT);\r\n        imgBack_CT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                finish();\r\n            }\r\n        });\r\n        loadDataSP();\r\n        idMuaNgay_CT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (MainActivity.checkLogin){\r\n                    Intent intent = new Intent(Activity_ThongTinSP.this, HoaDonChiTiet.class);\r\n                    intent.putExtra(\"SP_ID\",idSP);\r\n                    startActivity(intent);\r\n                }else{\r\n                    Intent intent = new Intent(Activity_ThongTinSP.this, DangNhapActivity.class);\r\n                    intent.putExtra(\"mua\",1);\r\n                    startActivity(intent);\r\n                }\r\n            }\r\n        });\r\n\r\n        idGioHang_CT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (MainActivity.checkLogin){\r\n                    TbGioHangDao tbGioHangDao = new TbGioHangDao();\r\n                    int gia = tbSanPham.getGiaBan();\r\n                    if (checkSale){\r\n                        gia = gia*(100-tbSaleSPDao.getGia_idsp(idSP))/100;\r\n                    }\r\n                    TbGioHang tbGioHang = new TbGioHang(DangNhapActivity.ID,idSP,1,gia);\r\n                    if (tbGioHangDao.checkExist(tbGioHang)){\r\n                        tbGioHangDao.updateRow(tbGioHang);\r\n                        Toast.makeText(Activity_ThongTinSP.this,\"Đã thêm vào giỏ hàng - update\",\r\n                                Toast.LENGTH_SHORT).show();\r\n                    }else{\r\n                        tbGioHangDao.insertRow(tbGioHang);\r\n                        Toast.makeText(Activity_ThongTinSP.this,\"Đã thêm vào giỏ hàng - insert\",\r\n                                Toast.LENGTH_SHORT).show();\r\n                    }\r\n                }else{\r\n                    Intent intent = new Intent(Activity_ThongTinSP.this, DangNhapActivity.class);\r\n                    startActivity(intent);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void loadDataSP(){\r\n        tbSaleSPDao = new TbSaleSPDao();\r\n        Intent intent = getIntent();\r\n        idSP = intent.getIntExtra(\"SP_VALUES\",0);\r\n        tbSanPham = MyDataBase_SP.getInstance(this).sanPhamDAO().getDataIdSP(idSP);\r\n        Picasso.get().load(tbSanPham.getSrcAnh()).fit().into(imgSanPham_CT);\r\n        tvNameSP_CT.setText(tbSanPham.getTen_sanPham());\r\n        tvInfo.setText(tbSanPham.getInfo());\r\n        int gia = tbSanPham.getGiaBan();\r\n        tvPriceSP_CT.setText(gia+\".000đ\");\r\n        tvPriceSP_CT_sale.setVisibility(View.INVISIBLE);\r\n        if (checkSale){\r\n            int gia_sale = tbSanPham.getGiaBan()*(100-tbSaleSPDao.getGia_idsp(idSP))/100;\r\n            tvPriceSP_CT_sale.setVisibility(View.VISIBLE);\r\n            tvPriceSP_CT.setText(gia_sale+\".000đ\");\r\n            tvPriceSP_CT_sale.setText(gia+\".000đ\");\r\n            tvPriceSP_CT_sale.setPaintFlags(tvPriceSP_CT_sale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java b/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java
+--- a/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java	(revision 844a33482b3fb3000bb5aab096d1053b3e25b915)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/ActivitySanPham/Activity_ThongTinSP.java	(date 1670408997202)
+@@ -1,6 +1,7 @@
+ package lam.fpoly.shopthoitrang.ActivitySanPham;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.recyclerview.widget.RecyclerView;
+ 
+ import android.annotation.SuppressLint;
+ import android.content.Intent;
+@@ -15,12 +16,16 @@
+ 
+ import com.squareup.picasso.Picasso;
+ 
++import java.util.List;
++
+ import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+ import lam.fpoly.shopthoitrang.ActivityDatHang.HoaDonChiTiet;
++import lam.fpoly.shopthoitrang.Dao.TbFeedBackDao;
+ import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
+ import lam.fpoly.shopthoitrang.Dao.TbHoaDonChiTietDao;
+ import lam.fpoly.shopthoitrang.Dao.TbSaleSPDao;
+ import lam.fpoly.shopthoitrang.MainActivity;
++import lam.fpoly.shopthoitrang.Model.TbFeedBack;
+ import lam.fpoly.shopthoitrang.Model.TbGioHang;
+ import lam.fpoly.shopthoitrang.Model.TbSanPham;
+ import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
+@@ -33,6 +38,9 @@
+     int idSP;
+     TbSanPham tbSanPham;
+     TbSaleSPDao tbSaleSPDao;
++    TbFeedBackDao tbFeedBackDao;
++    RecyclerView rsv_fb;
++    List<TbFeedBack> tbFeedBack;
+     public static boolean checkSale = false;
+     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
+     @Override
+@@ -46,6 +54,10 @@
+         idGioHang_CT = findViewById(R.id.idGioHang_CT);
+         tvPriceSP_CT_sale = findViewById(R.id.tvPriceSP_CT_sale);
+         tvInfo = findViewById(R.id.tvInfo);
++        rsv_fb = findViewById(R.id.rsv_feedBack);
++
++
++
+         imgBack_CT = findViewById(R.id.imgBack_CT);
+         imgBack_CT.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/java/lam/fpoly/shopthoitrang/Adapter/KhachhangAdapter.java
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/KhachhangAdapter.java b/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/KhachhangAdapter.java
+deleted file mode 100644
+--- a/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/KhachhangAdapter.java	(revision 844a33482b3fb3000bb5aab096d1053b3e25b915)
++++ /dev/null	(revision 844a33482b3fb3000bb5aab096d1053b3e25b915)
+@@ -1,4 +0,0 @@
+-package lam.fpoly.shopthoitrang.Adapter;
+-
+-public class KhachhangAdapter {
+-}
+Index: app/src/main/res/layout/activity_activiti_thong_tin_sp.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#0C000000\"\r\n    android:padding=\"10dp\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <FrameLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imgSanPham_CT\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"450dp\"\r\n                    android:scaleType=\"centerCrop\"\r\n                    android:src=\"@drawable/bomber\" />\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:background=\"@color/gray\" />\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imgBack_CT\"\r\n                    android:layout_width=\"40dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:src=\"@drawable/back\" />\r\n            </FrameLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\"\r\n                android:gravity=\"center\"\r\n                android:padding=\"5dp\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvNameSP_CT\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Áo Bomber\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:textSize=\"22dp\" />\r\n                <LinearLayout\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"horizontal\"\r\n                    android:gravity=\"center_vertical\"\r\n                    android:padding=\"5dp\">\r\n                    <TextView\r\n                        android:id=\"@+id/tvPriceSP_CT\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:fontFamily=\"@font/gilda_display\"\r\n                        android:text=\"400000 $\"\r\n                        android:textColor=\"@color/red\"\r\n                        android:textSize=\"20dp\"\r\n                        android:textStyle=\"bold\" />\r\n                    <TextView\r\n                        android:id=\"@+id/tvPriceSP_CT_sale\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_marginLeft=\"5dp\"\r\n                        android:fontFamily=\"@font/gilda_display\"\r\n                        android:textColor=\"@color/gray\"\r\n                        android:textSize=\"17dp\" />\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvInfo\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:minHeight=\"140dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:paddingLeft=\"30dp\"\r\n                android:text=\"dadadadadaadad \\ndâdad \\ndadadadadaadad \\ndâdad \\ndadad\"\r\n                android:textSize=\"17dp\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            style=\"@style/Widget.Material3.BottomNavigationView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:background=\"#14000000\"\r\n            android:gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/idMuaNgay_CT\"\r\n                android:layout_width=\"180dp\"\r\n                android:layout_height=\"50dp\"\r\n                android:layout_marginRight=\"50dp\"\r\n                android:background=\"@drawable/background_muangay\"\r\n                android:fontFamily=\"@font/lexend_mega\"\r\n                android:gravity=\"center\"\r\n                android:text=\"Mua Ngay\"\r\n                android:textAllCaps=\"true\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"20dp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <LinearLayout\r\n                android:id=\"@+id/idGioHang_CT\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:background=\"@drawable/background_btn_giohang\"\r\n                android:gravity=\"center\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:src=\"@drawable/shopping_basket\" />\r\n\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n</ScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml b/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml
+--- a/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml	(revision 844a33482b3fb3000bb5aab096d1053b3e25b915)
++++ b/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml	(date 1670406658099)
+@@ -17,7 +17,8 @@
+ 
+             <FrameLayout
+                 android:layout_width="match_parent"
+-                android:layout_height="wrap_content">
++                android:layout_height="wrap_content"
++                android:visibility="gone">
+ 
+                 <ImageView
+                     android:id="@+id/imgSanPham_CT"
+@@ -42,8 +43,8 @@
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
++                android:gravity="center"
+                 android:orientation="vertical"
+-                android:gravity="center"
+                 android:padding="5dp">
+ 
+                 <TextView
+@@ -53,12 +54,14 @@
+                     android:text="Áo Bomber"
+                     android:textColor="@color/black"
+                     android:textSize="22dp" />
++
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:orientation="horizontal"
+                     android:gravity="center_vertical"
++                    android:orientation="horizontal"
+                     android:padding="5dp">
++
+                     <TextView
+                         android:id="@+id/tvPriceSP_CT"
+                         android:layout_width="wrap_content"
+@@ -68,6 +71,7 @@
+                         android:textColor="@color/red"
+                         android:textSize="20dp"
+                         android:textStyle="bold" />
++
+                     <TextView
+                         android:id="@+id/tvPriceSP_CT_sale"
+                         android:layout_width="wrap_content"
+@@ -83,8 +87,8 @@
+                 android:id="@+id/tvInfo"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+-                android:minHeight="140dp"
+                 android:layout_marginBottom="10dp"
++                android:minHeight="140dp"
+                 android:paddingLeft="30dp"
+                 android:text="dadadadadaadad \ndâdad \ndadadadadaadad \ndâdad \ndadad"
+                 android:textSize="17dp" />
+@@ -127,6 +131,57 @@
+ 
+             </LinearLayout>
+ 
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical"
++            android:layout_marginTop="20dp">
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:orientation="horizontal">
++                <ImageView
++                    android:layout_gravity="start|center"
++                    android:layout_margin="10dp"
++                    android:layout_width="40dp"
++                    android:layout_height="40dp"
++                    android:id="@+id/onesao"
++                    android:src="@drawable/ic_baseline_star_rate_24"/>
++                <ImageView
++                    android:layout_gravity="start|center"
++                    android:layout_margin="10dp"
++                    android:layout_width="40dp"
++                    android:layout_height="40dp"
++                    android:id="@+id/twosao"
++                    android:src="@drawable/ic_baseline_star_rate_24"/>
++                <ImageView
++                    android:layout_gravity="start|center"
++                    android:layout_margin="10dp"
++                    android:layout_width="40dp"
++                    android:layout_height="40dp"
++                    android:id="@+id/threesao"
++                    android:src="@drawable/ic_baseline_star_rate_24"/>
++                <ImageView
++                    android:layout_gravity="start|center"
++                    android:layout_margin="10dp"
++                    android:layout_width="40dp"
++                    android:layout_height="40dp"
++                    android:id="@+id/foursao"
++                    android:src="@drawable/ic_baseline_star_rate_24"/>
++                <ImageView
++                    android:layout_gravity="start|center"
++                    android:layout_margin="10dp"
++                    android:layout_width="40dp"
++                    android:layout_height="40dp"
++                    android:id="@+id/fivesao"
++                    android:src="@drawable/ic_baseline_star_rate_24"/>
++            </LinearLayout>
++            <androidx.recyclerview.widget.RecyclerView
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:id="@+id/rsv_feedBack"/>
+         </LinearLayout>
+     </LinearLayout>
+ </ScrollView>
+\ No newline at end of file
+Index: app/src/main/java/lam/fpoly/shopthoitrang/Adapter/FeedBackAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/FeedBackAdapter.java b/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/FeedBackAdapter.java
+new file mode 100644
+--- /dev/null	(date 1670408840689)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/Adapter/FeedBackAdapter.java	(date 1670408840689)
+@@ -0,0 +1,82 @@
++package lam.fpoly.shopthoitrang.Adapter;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import com.squareup.picasso.Picasso;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import lam.fpoly.shopthoitrang.Dao.TbFeedBackDao;
++import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
++import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
++import lam.fpoly.shopthoitrang.Model.TbFeedBack;
++import lam.fpoly.shopthoitrang.Model.TbHoaDonChiTiet;
++import lam.fpoly.shopthoitrang.R;
++
++public class FeedBackAdapter extends BaseAdapter {
++    private Context context;
++    private List<TbFeedBack> list = new ArrayList<>();
++
++    public FeedBackAdapter(Context context, List<TbFeedBack> list) {
++        this.context = context;
++        this.list = list;
++    }
++
++    @Override
++    public int getCount() {
++        return list.size();
++    }
++
++    @Override
++    public Object getItem(int position) {
++        return null;
++    }
++
++    @Override
++    public long getItemId(int position) {
++        return 0;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup parent) {
++        IconViewHolder viewHolder = null;
++        int i = position;
++        if(convertView == null){
++            viewHolder = new IconViewHolder();
++            LayoutInflater inflater = (LayoutInflater) context.
++                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);
++            convertView = inflater.inflate(R.layout.item_feedback,null);
++            viewHolder.fb_name = convertView.findViewById(R.id.fb_name);
++            viewHolder.fb_star = convertView.findViewById(R.id.fb_star);
++            viewHolder.fb_mess = convertView.findViewById(R.id.fb_mess);
++            viewHolder.fb_avatar = convertView.findViewById(R.id.fb_avatar);
++            viewHolder.fb_img = convertView.findViewById(R.id.fb_img);
++
++            TbFeedBack obj = list.get(i);
++            TbKhachHangDao tbKhachHangDao = new TbKhachHangDao();
++            Picasso.get().load(tbKhachHangDao.getUser(obj.getId_khachhang()).getAvatar()).fit().into(viewHolder.fb_avatar);
++            viewHolder.fb_name.setText(tbKhachHangDao.getUser(obj.getId_khachhang()).getTen_khachHang());
++            viewHolder.fb_star.setText("Đánh giá: "+obj.getSoStar());
++            viewHolder.fb_mess.setText(obj.getMess());
++            Picasso.get().load(obj.getAnh()).fit().into(viewHolder.fb_img);
++
++            convertView.setTag(viewHolder);
++        }else{
++            viewHolder = (IconViewHolder) convertView.getTag();
++        }
++        return convertView;
++    }
++
++    public static class IconViewHolder{
++        private TextView fb_name,fb_star,fb_mess;
++        private ImageView fb_avatar,fb_img;
++    }
++
++}
+Index: app/src/main/res/layout/item_feedback.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_feedback.xml b/app/src/main/res/layout/item_feedback.xml
+new file mode 100644
+--- /dev/null	(date 1670406658075)
++++ b/app/src/main/res/layout/item_feedback.xml	(date 1670406658075)
+@@ -0,0 +1,66 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="vertical"
++    android:padding="15dp">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal">
++
++        <de.hdodenhof.circleimageview.CircleImageView
++            android:id="@+id/fb_avatar"
++            android:layout_width="50dp"
++            android:layout_height="50dp"
++            android:src="@drawable/ic_launcher_background" />
++
++        <TextView
++            android:id="@+id/fb_name"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center_vertical"
++            android:layout_marginLeft="20dp"
++            android:text="Nguyễn Văn A" />
++
++        <TextView
++            android:id="@+id/fb_star"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center_vertical"
++            android:layout_marginLeft="20dp"
++            android:text="số Sao" />
++    </LinearLayout>
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="80dp"
++        android:layout_marginTop="15dp"
++        android:orientation="horizontal">
++
++        <ImageView
++            android:id="@+id/fb_img"
++            android:layout_width="80dp"
++            android:layout_height="wrap_content"
++            android:src="@drawable/ic_launcher_background"/>
++
++        <ScrollView
++            android:layout_width="match_parent"
++            android:layout_height="match_parent">
++
++            <TextView
++                android:id="@+id/fb_mess"
++                android:textSize="16dp"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:padding="10dp"
++                android:text="adaflskdflsfslfjf \n dâdad \ndâdđa\ndadad\ndada\adadad" />
++        </ScrollView>
++    </LinearLayout>
++    <LinearLayout
++        android:layout_marginTop="10dp"
++        android:layout_width="match_parent"
++        android:layout_height="1dp"
++        android:background="@color/black"/>
++</LinearLayout>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/bg_bogoc.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/ic_baseline_edit_24.xml\" value=\"0.1195\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/ic_baseline_edit_24.xml\" value=\"0.1195\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/font/archivo_medium.xml\" value=\"0.20462962962962963\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/font/gilda_display.xml\" value=\"0.20462962962962963\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml\" value=\"0.16666666666666666\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_dang_nhap.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_hoa_don_chi_tiet.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_manhinhcho.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_quan_ly_don_hang.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_acc.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_create_.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_danh_muc.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_gio_hang.xml\" value=\"0.17980072463768115\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_new_product_.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_thong_tin.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layouitem_danhmuc.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layoutitem_giohang.xml\" value=\"0.182518115942029\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layoutitem_hoadon.xml\" value=\"0.182518115942029\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layoutitem_home.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/sanpham_item.xml\" value=\"0.15172101449275363\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/them.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Duan1/dua/quanlythoitrang/app/src/main/res/menu/menu_search.xml\" value=\"0.184375\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 844a33482b3fb3000bb5aab096d1053b3e25b915)
++++ b/.idea/misc.xml	(date 1670406658480)
+@@ -6,6 +6,7 @@
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/bg_bogoc.xml" value="0.1" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable-v24/ic_baseline_edit_24.xml" value="0.1195" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1195" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/drawable/item_feedback.xml" value="0.1" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/font/archivo_medium.xml" value="0.20462962962962963" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/font/gilda_display.xml" value="0.20462962962962963" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/activity_activiti_thong_tin_sp.xml" value="0.16666666666666666" />
+@@ -20,6 +21,7 @@
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_gio_hang.xml" value="0.17980072463768115" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_new_product_.xml" value="0.15172101449275363" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/fragment_thong_tin.xml" value="0.1" />
++        <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/item_feedback.xml" value="0.13903985507246377" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layouitem_danhmuc.xml" value="0.15172101449275363" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layoutitem_giohang.xml" value="0.182518115942029" />
+         <entry key="..\:/Duan1/dua/quanlythoitrang/app/src/main/res/layout/layoutitem_hoadon.xml" value="0.182518115942029" />
+Index: app/src/main/res/drawable/ic_baseline_star_rate_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_star_rate_24.xml b/app/src/main/res/drawable/ic_baseline_star_rate_24.xml
+new file mode 100644
+--- /dev/null	(date 1670405499646)
++++ b/app/src/main/res/drawable/ic_baseline_star_rate_24.xml	(date 1670405499646)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M14.43,10l-2.43,-8l-2.43,8l-7.57,0l6.18,4.41l-2.35,7.59l6.17,-4.69l6.18,4.69l-2.35,-7.59l6.17,-4.41z"/>
++</vector>
+Index: app/src/main/java/lam/fpoly/shopthoitrang/Model/TbFeedBack.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/Model/TbFeedBack.java b/app/src/main/java/lam/fpoly/shopthoitrang/Model/TbFeedBack.java
+new file mode 100644
+--- /dev/null	(date 1670406792382)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/Model/TbFeedBack.java	(date 1670406792382)
+@@ -0,0 +1,60 @@
++package lam.fpoly.shopthoitrang.Model;
++
++public class TbFeedBack {
++    int id_khachhang;
++    int id_sanpham;
++    int soStar;
++    String mess;
++    String anh;
++
++    public TbFeedBack() {
++    }
++
++    public TbFeedBack(int id_khachhang, int id_sanpham, int soStar, String mess, String anh) {
++        this.id_khachhang = id_khachhang;
++        this.id_sanpham = id_sanpham;
++        this.soStar = soStar;
++        this.mess = mess;
++        this.anh = anh;
++    }
++
++    public int getId_khachhang() {
++        return id_khachhang;
++    }
++
++    public void setId_khachhang(int id_khachhang) {
++        this.id_khachhang = id_khachhang;
++    }
++
++    public int getId_sanpham() {
++        return id_sanpham;
++    }
++
++    public void setId_sanpham(int id_sanpham) {
++        this.id_sanpham = id_sanpham;
++    }
++
++    public int getSoStar() {
++        return soStar;
++    }
++
++    public void setSoStar(int soStar) {
++        this.soStar = soStar;
++    }
++
++    public String getMess() {
++        return mess;
++    }
++
++    public void setMess(String mess) {
++        this.mess = mess;
++    }
++
++    public String getAnh() {
++        return anh;
++    }
++
++    public void setAnh(String anh) {
++        this.anh = anh;
++    }
++}
+Index: app/src/main/java/lam/fpoly/shopthoitrang/Dao/TbFeedBackDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/lam/fpoly/shopthoitrang/Dao/TbFeedBackDao.java b/app/src/main/java/lam/fpoly/shopthoitrang/Dao/TbFeedBackDao.java
+new file mode 100644
+--- /dev/null	(date 1670407918157)
++++ b/app/src/main/java/lam/fpoly/shopthoitrang/Dao/TbFeedBackDao.java	(date 1670407918157)
+@@ -0,0 +1,66 @@
++package lam.fpoly.shopthoitrang.Dao;
++
++import android.util.Log;
++
++import java.sql.Connection;
++import java.sql.ResultSet;
++import java.sql.Statement;
++import java.util.ArrayList;
++import java.util.List;
++
++import lam.fpoly.shopthoitrang.DbSqlServer;
++import lam.fpoly.shopthoitrang.Model.TbFeedBack;
++import lam.fpoly.shopthoitrang.Model.TbSaleSP;
++
++public class TbFeedBackDao {
++    Connection objConn;
++
++    public TbFeedBackDao() {
++        DbSqlServer db = new DbSqlServer();
++        objConn = db.openConnect();
++    }
++
++    public List<TbFeedBack> getAll() {
++        List<TbFeedBack> list = new ArrayList<TbFeedBack>();
++        try {
++            if (this.objConn != null) {
++                String sqlQuery = "SELECT * FROM feedBack";
++                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
++                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
++                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
++                    TbFeedBack obj = new TbFeedBack();
++                    obj.setId_sanpham(resultSet.getInt("id_sanPham"));
++                    obj.setId_khachhang(resultSet.getInt("id_khachHang"));
++                    obj.setSoStar(resultSet.getInt("soStar"));
++                    obj.setMess(resultSet.getString("mess"));
++                    obj.setAnh(resultSet.getString("anh"));
++                    list.add(obj);
++                }
++            }
++        } catch (Exception e) {
++            Log.i("TAG", "getAll: lỗi");
++        }
++
++        return list;
++    }
++
++    public int getGia_idsp(int idsp) {
++        int gia = 0;
++        try {
++            if (this.objConn != null) {
++                String sqlQuery = "SELECT * FROM saleSP WHERE id_sanpham = "+idsp+"";
++                Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
++                ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
++                while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
++                    gia = resultSet.getInt("sale");
++                }
++            }
++        } catch (Exception e) {
++            Log.i("TAG", "getAll: lỗi");
++        }
++
++        return gia;
++    }
++
++
++}

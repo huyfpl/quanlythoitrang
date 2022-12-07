@@ -1,6 +1,8 @@
 package lam.fpoly.shopthoitrang.ActivitySanPham;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,17 +12,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.ActivityDatHang.HoaDonChiTiet;
+import lam.fpoly.shopthoitrang.Adapter.FeedBackAdapter;
+import lam.fpoly.shopthoitrang.Dao.TbFeedBackDao;
 import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Dao.TbHoaDonChiTietDao;
 import lam.fpoly.shopthoitrang.Dao.TbSaleSPDao;
 import lam.fpoly.shopthoitrang.MainActivity;
+import lam.fpoly.shopthoitrang.Model.TbFeedBack;
 import lam.fpoly.shopthoitrang.Model.TbGioHang;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_SP;
@@ -33,6 +42,10 @@ public class Activity_ThongTinSP extends AppCompatActivity {
     int idSP;
     TbSanPham tbSanPham;
     TbSaleSPDao tbSaleSPDao;
+    TbFeedBackDao tbFeedBackDao;
+    ListView rsv_fb;
+    List<TbFeedBack> listFb;
+    FeedBackAdapter feedBackAdapter;
     public static boolean checkSale = false;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -46,6 +59,14 @@ public class Activity_ThongTinSP extends AppCompatActivity {
         idGioHang_CT = findViewById(R.id.idGioHang_CT);
         tvPriceSP_CT_sale = findViewById(R.id.tvPriceSP_CT_sale);
         tvInfo = findViewById(R.id.tvInfo);
+        rsv_fb = findViewById(R.id.rsv_feedBack);
+        loadDataSP();
+        listFb = new ArrayList<>();
+        tbFeedBackDao = new TbFeedBackDao();
+        listFb = tbFeedBackDao.getAll(idSP);
+        feedBackAdapter = new FeedBackAdapter(this,listFb);
+        Log.i("TAG", "activity: "+listFb.size());
+        rsv_fb.setAdapter(feedBackAdapter);
         imgBack_CT = findViewById(R.id.imgBack_CT);
         imgBack_CT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +74,7 @@ public class Activity_ThongTinSP extends AppCompatActivity {
                 finish();
             }
         });
-        loadDataSP();
+
         idMuaNgay_CT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

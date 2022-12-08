@@ -81,7 +81,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
 
 
         holder.tvName_SanPham.setText(tbSanPham.getTen_sanPham());
-        holder.tvGia_SanPham.setText(tbSanPham.getGiaBan()+".000đ");
+        holder.tvGia_SanPham.setText(obj.getGia()+".000đ");
         Picasso.get().load(tbSanPham.getSrcAnh()).fit().into(holder.imgSanPham);
 
         holder.imgItemCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -90,7 +90,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                 interClickItemData.clickCheck(tbSanPham,i,obj,isChecked);
                 if (isChecked){
                     holder.idLayoutTangGiam.setVisibility(View.VISIBLE);
-                    Log.d("ccc", "onCheckedChanged: "+holder.imgItemCheck.isChecked());
                 }else {
                     holder.idLayoutTangGiam.setVisibility(View.GONE);
                 }

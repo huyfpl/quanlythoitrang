@@ -2,6 +2,7 @@ package lam.fpoly.shopthoitrang.ActivityDatHang;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,10 +18,13 @@ import java.util.Date;
 import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
+import lam.fpoly.shopthoitrang.ActivitySanPham.Activity_ThongTinSP;
 import lam.fpoly.shopthoitrang.Adapter.HoaDonAdapter;
 import lam.fpoly.shopthoitrang.Dao.TbDonHangDao;
+import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Dao.TbHoaDonChiTietDao;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
+import lam.fpoly.shopthoitrang.Dao.TbSaleSPDao;
 import lam.fpoly.shopthoitrang.Model.TbDonHang;
 import lam.fpoly.shopthoitrang.Model.TbHoaDonChiTiet;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
@@ -38,7 +42,8 @@ public class HoaDonChiTiet extends AppCompatActivity {
     int SP_ID = 0;
     List<DonHang_Temorary> list;
     HoaDonAdapter hoaDonAdapter;
-    int phiShip = 50000;
+    TbSaleSPDao tbSaleSPDao;
+    int phiShip = 50;
     int tienHang;
     int tongTien = 0;
     String trangThai = "Chờ xác nhận";
@@ -62,8 +67,6 @@ public class HoaDonChiTiet extends AppCompatActivity {
         idRcv_HDCT = findViewById(R.id.idRcv_HDCT);
         idSelectVoucher = findViewById(R.id.idSelectVoucher);
 
-        list = new ArrayList<>();
-
         hoaDonAdapter = new HoaDonAdapter(new HoaDonAdapter.InterClickItemData() {
             @Override
             public void clickUp() {
@@ -80,7 +83,6 @@ public class HoaDonChiTiet extends AppCompatActivity {
         idRcv_HDCT.setLayoutManager(manager);
         idRcv_HDCT.setAdapter(hoaDonAdapter);
         loadData();
-
         thongTinGiaoHang();
         ship();
         tongTienHang();
@@ -92,15 +94,12 @@ public class HoaDonChiTiet extends AppCompatActivity {
                 TbDonHangDao tbDonHangDao = new TbDonHangDao();
                 TbDonHang tbDonHang = new TbDonHang(DangNhapActivity.ID,trangThai,dateFormat.format(new Date()),tongTien);
                 tbDonHangDao.insertRow(tbDonHang);
-
                 TbHoaDonChiTietDao tbHoaDonChiTietDao = new TbHoaDonChiTietDao();
-
                 for(int i = 0 ; i < list.size() ; i++){
                     TbHoaDonChiTiet tbHoaDonChiTiet = new TbHoaDonChiTiet(tbDonHangDao.getIdDonHang(),
-                            list.get(i).getId_sanPham(),list.get(i).getSoLuong());
+                            list.get(i).getId_sanPham(),list.get(i).getSoLuong(),list.get(i).getGia_sanPham());
                     tbHoaDonChiTietDao.insertRow(tbHoaDonChiTiet);
                 }
-
                 Intent intent = new Intent(HoaDonChiTiet.this,DatHangThanhCong.class);
                 startActivity(intent);
             }
@@ -108,19 +107,29 @@ public class HoaDonChiTiet extends AppCompatActivity {
     }
 
     private void loadData(){
+        tbSaleSPDao = new TbSaleSPDao();
         Intent intent = getIntent();
         SP_ID = intent.getIntExtra("SP_ID",0);
+        list = new ArrayList<>();
         if (SP_ID == 0){
             list = MyDataBase_Temporary.getInstance(this).donHangDAO().getListData();
             hoaDonAdapter.setData(list);
         }else{
             TbSanPham tbSanPham = MyDataBase_SP.getInstance(this).sanPhamDAO().getDataIdSP(SP_ID);
+            int gia = tbSanPham.getGiaBan();
+            if (Activity_ThongTinSP.checkSale){
+                gia = gia*(100-tbSaleSPDao.getGia_idsp(tbSanPham.getId_sanPham()))/100;
+            }
+
+//            List<DonHang_Temorary> temorary = MyDataBase_Temporary.getInstance(this).donHangDAO().getListData();
+//            for (DonHang_Temorary dh : temorary){
+//                Log.i("TAG", "tên: "+dh.getTen_sanPham()+" - số lượng: "+dh.getSoLuong());
+//            }
             list.add(new DonHang_Temorary(tbSanPham.getId(),tbSanPham.getId_sanPham(),
-                   tbSanPham.getTen_sanPham(),tbSanPham.getGiaBan(),
+                   tbSanPham.getTen_sanPham(),gia,
                     tbSanPham.getSrcAnh(),1));
             hoaDonAdapter.setData(list);
         }
-
     }
 
     private void thongTinGiaoHang(){
@@ -133,22 +142,22 @@ public class HoaDonChiTiet extends AppCompatActivity {
 
     private void tongTienHang(){
         tienHang = 0;
-        loadData();
+        List<DonHang_Temorary> list = MyDataBase_Temporary.getInstance(this).donHangDAO().getListData();
         for(int i = 0 ; i < list.size() ; i++){
             tienHang += list.get(i).getGia_sanPham() * list.get(i).getSoLuong();
-            tvTienHang_HDCT.setText(String.valueOf(tienHang)+" đ");
-            tvTongTienHang_HDCT.setText(String.valueOf(tienHang)+" đ");
+            tvTienHang_HDCT.setText(tienHang+".000đ");
+            tvTongTienHang_HDCT.setText(tienHang+".000đ");
         }
         total();
     }
 
     private void total(){
         tongTien = tienHang + phiShip;
-        tvTongTienThanhToan.setText(String.valueOf(tongTien)+" đ");
+        tvTongTienThanhToan.setText(tongTien+".000đ");
     }
 
     private void ship(){
-        tvPhiShip_HDCT.setText(String.valueOf(phiShip)+" đ");
+        tvPhiShip_HDCT.setText(phiShip+".000đ");
     }
 
     @Override

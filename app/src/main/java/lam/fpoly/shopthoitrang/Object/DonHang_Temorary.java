@@ -14,6 +14,9 @@ public class DonHang_Temorary {
     String anh_sanPham;
     int soLuong;
 
+    public DonHang_Temorary() {
+    }
+
     public DonHang_Temorary(int id, int id_sanPham, String ten_sanPham, int gia_sanPham, String anh_sanPham, int soLuong) {
         this.id = id;
         this.id_sanPham = id_sanPham;

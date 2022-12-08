@@ -31,17 +31,20 @@
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="10">
 
             <TextView
                 android:id="@+id/tvItemNameSP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2.5"
                 android:textSize="20dp"
                 android:textColor="#BA101F37"
                 android:text="Áo Bomber Jacket"/>
 
             <TextView
+                android:layout_weight="2"
                 android:id="@+id/tvItemPriceSP"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
@@ -53,7 +56,6 @@
 
             <LinearLayout
                 android:id="@+id/idLayoutTangGiam"
-                android:layout_marginTop="65dp"
                 android:background="@drawable/border_tanggiam"
                 android:layout_width="120dp"
                 android:gravity="center"
@@ -85,11 +87,11 @@
 
                     <ImageView
                         android:id="@+id/imgItemTang"
-                        android:layout_weight="3"
+                        android:layout_width="45dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add"/>
+                        android:layout_weight="3"
+                        android:src="@drawable/add" />
 
                 </LinearLayout>
 

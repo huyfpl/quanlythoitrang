@@ -24,6 +24,7 @@ import java.util.List;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.ActivityDatHang.HoaDonChiTiet;
+import lam.fpoly.shopthoitrang.ActivitySanPham.Activity_ThongTinSP;
 import lam.fpoly.shopthoitrang.Adapter.GioHangAdapter;
 import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Model.TbGioHang;
@@ -80,19 +81,20 @@ public class GioHang_Fragment extends Fragment {
         gioHangAdapter = new GioHangAdapter(new GioHangAdapter.InterClickItemData() {
             @Override
             public void clickCheck(TbSanPham tbSanPham, int position, TbGioHang tbGioHang, boolean isCheck) {
+                int giaMua = tbGioHangDao.getGiaBan(tbSanPham.getId_sanPham());
                 if(isCheck){
-                    total += tbSanPham.getGiaBan();
-                    tvTongTien_GH.setText(String.valueOf(total));
+                    total += giaMua;
+                    tvTongTien_GH.setText(total+".000đ");
                     showLayout++;
                     showLayOut();
                     donHang = new DonHang_Temorary(position,tbSanPham.getId_sanPham(),
-                            tbSanPham.getTen_sanPham(), tbSanPham.getGiaBan(),
+                            tbSanPham.getTen_sanPham(), giaMua,
                             tbSanPham.getSrcAnh(), tbGioHang.getSoLuongSP());
                     MyDataBase_Temporary.getInstance(getActivity()).donHangDAO().insertData(donHang);
                     tongTienHang();
                 }else{
-                    total -= tbSanPham.getGiaBan();
-                    tvTongTien_GH.setText(String.valueOf(total));
+                    total -= giaMua;
+                    tvTongTien_GH.setText(total+".000đ");
                     showLayout--;
                     showLayOut();
                     MyDataBase_Temporary.getInstance(getActivity()).donHangDAO().deletePosition(position);
@@ -134,7 +136,7 @@ public class GioHang_Fragment extends Fragment {
         tienHang = 0;
         for(int i = 0 ; i < mList.size() ; i++){
             tienHang += mList.get(i).getGia_sanPham() * mList.get(i).getSoLuong();
-            tvTongTien_GH.setText(String.valueOf(tienHang));
+            tvTongTien_GH.setText(tienHang+".000đ");
         }
     }
 

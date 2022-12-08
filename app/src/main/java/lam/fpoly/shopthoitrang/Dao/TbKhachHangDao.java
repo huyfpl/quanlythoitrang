@@ -35,7 +35,7 @@ public class TbKhachHangDao {
                     obj.setDiaChi(resultSet.getString("diaChi"));
                     obj.setUserName(resultSet.getString("userName"));
                     obj.setUserPass(resultSet.getString("userPass"));
-
+                    obj.setAvatar(resultSet.getString("avatar"));
                     listCat.add(obj);
                 }
             }
@@ -100,6 +100,7 @@ public class TbKhachHangDao {
                     obj.setDiaChi(resultSet.getString("diaChi"));
                     obj.setUserName(resultSet.getString("userName"));
                     obj.setUserPass(resultSet.getString("userPass"));
+                    obj.setAvatar(resultSet.getString("avatar"));
                     listKH.add(obj);
                 }
             }
@@ -116,7 +117,8 @@ public class TbKhachHangDao {
                         "sdt_khachHang = '"+obj.getSdt_khachHang()+"', " +
                         "diaChi = N'"+obj.getDiaChi()+"', " +
                         "userName = '"+obj.getUserName()+"',     " +
-                        "userPass = '"+obj.getUserPass()+"' " +
+                        "userPass = '"+obj.getUserPass()+"'," +
+                        "avatar = '"+obj.getAvatar()+"' " +
                         "WHERE id_khachHang = "+obj.getId_khachHang()+"";
                 PreparedStatement stmt = this.objConn.prepareStatement(sqlUpdate);
                 stmt.execute(); // thực thi câu lệnh SQL

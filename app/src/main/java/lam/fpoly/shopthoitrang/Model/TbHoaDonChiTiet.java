@@ -4,14 +4,15 @@ public class TbHoaDonChiTiet {
     int id_DonHang;
     int id_SanPham;
     int soLuong;
-
+    int gia;
     public TbHoaDonChiTiet() {
     }
 
-    public TbHoaDonChiTiet(int id_DonHang, int id_SanPham, int soLuong) {
+    public TbHoaDonChiTiet(int id_DonHang, int id_SanPham, int soLuong,int gia) {
         this.id_DonHang = id_DonHang;
         this.id_SanPham = id_SanPham;
         this.soLuong = soLuong;
+        this.gia = gia;
     }
 
     public int getId_DonHang() {
@@ -36,5 +37,13 @@ public class TbHoaDonChiTiet {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public int getGia() {
+        return gia;
+    }
+
+    public void setGia(int gia) {
+        this.gia = gia;
     }
 }

@@ -1,6 +1,7 @@
 package lam.fpoly.shopthoitrang.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import lam.fpoly.shopthoitrang.Dao.TbGioHangDao;
 import lam.fpoly.shopthoitrang.Dao.TbSanPhamDao;
 import lam.fpoly.shopthoitrang.Model.TbSanPham;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
@@ -54,22 +56,20 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.GioHangVie
     @Override
     public void onBindViewHolder(@NonNull GioHangViewHolder holder, int position) {
         int i = position;
-        DonHang_Temorary obj = list.get(position);
-        if (obj == null){
+        DonHang_Temorary objj = list.get(position);
+        if (objj == null){
             return;
         }
-        TbSanPhamDao sanPhamDao = new TbSanPhamDao();
-
-        TbSanPham tbSanPham = sanPhamDao.getSpID(obj.getId_sanPham());
-        if (tbSanPham == null){
-            return;
+        List<DonHang_Temorary> temorary = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getListData();
+        if (temorary.size()==0){
+            MyDataBase_Temporary.getInstance(holder.context).donHangDAO().insertData(objj);
         }
+        DonHang_Temorary obj = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getObjectData(objj.getId_sanPham());
 
-        number = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getSoLuong(i);
-
-        holder.tvName_SanPham.setText(tbSanPham.getTen_sanPham());
-        holder.tvGia_SanPham.setText(String.valueOf(tbSanPham.getGiaBan()));
-        Picasso.get().load(tbSanPham.getSrcAnh()).fit().into(holder.imgSanPham);
+        number = obj.getSoLuong();
+        holder.tvName_SanPham.setText(obj.getTen_sanPham());
+        holder.tvGia_SanPham.setText(obj.getGia_sanPham()+".000đ");
+        Picasso.get().load(obj.getAnh_sanPham()).fit().into(holder.imgSanPham);
 
         holder.imgItemGiam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,30 +77,21 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.GioHangVie
                 if (number > 1) {
                     number--;
                     holder.tvSoLuongItem.setText(String.valueOf(number));
-                    DonHang_Temorary donHang_temorary = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getObjectData(i);
-                    MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number, donHang_temorary.getId());
+                    MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number,obj.getId_sanPham());
                     interClickItemData.clickDown();
                 }
             }
         });
 
-        holder.tvSoLuongItem.setText(String.valueOf(obj.getSoLuong()));
+        holder.tvSoLuongItem.setText(String.valueOf(number));
 
         holder.imgItemTang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 number++;
                 holder.tvSoLuongItem.setText(String.valueOf(number));
-                DonHang_Temorary donHang_temorary = MyDataBase_Temporary.getInstance(holder.context).donHangDAO().getObjectData(i);
-                MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number, donHang_temorary.getId());
+                MyDataBase_Temporary.getInstance(holder.context).donHangDAO().update(number,obj.getId_sanPham());
                 interClickItemData.clickUp();
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 

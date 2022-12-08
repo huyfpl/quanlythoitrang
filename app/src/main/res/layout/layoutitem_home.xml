@@ -63,12 +63,23 @@
                     android:id="@+id/tvSpName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
+                    android:text="299999"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/tvSpPrice_sale"
+                    android:layout_width="wrap_content"
+=======
                     android:text="Tên áo"
                     android:textSize="16dp"
                     android:textColor="#1E355C"
                     android:textStyle="bold"/>
                 <LinearLayout
                     android:layout_width="match_parent"
+>>>>>>> bb2a78971e1eb19fc0033c2ed0900285fa581b3f
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView

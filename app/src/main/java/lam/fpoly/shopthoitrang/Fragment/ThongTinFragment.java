@@ -32,7 +32,6 @@ import java.util.List;
 
 import lam.fpoly.shopthoitrang.AccFragment.DangNhapActivity;
 import lam.fpoly.shopthoitrang.Dao.TbKhachHangDao;
-import lam.fpoly.shopthoitrang.DonMua.DonMua_Activity;
 import lam.fpoly.shopthoitrang.MainActivity;
 import lam.fpoly.shopthoitrang.Model.TbKhachHang;
 import lam.fpoly.shopthoitrang.MyDataBase.MyDataBase_Temporary;
@@ -43,7 +42,7 @@ import lam.fpoly.shopthoitrang.R;
 public class ThongTinFragment extends Fragment {
 
     TextView user_ten,user_tendangnhap,user_sdt,user_diachi;
-    LinearLayout user_edit,idDangXuat,idDonMua;
+    LinearLayout user_edit,idDangXuat;
     TbKhachHangDao khDao;
     TbKhachHang kh;
     Context context;
@@ -63,7 +62,6 @@ public class ThongTinFragment extends Fragment {
         user_diachi = view.findViewById(R.id.user_diachi);
         user_edit = view.findViewById(R.id.user_edit);
         idDangXuat = view.findViewById(R.id.idDangXuat);
-        idDonMua = view.findViewById(R.id.idDonMua);
         khDao = new TbKhachHangDao();
         context = getActivity();
         id = DangNhapActivity.ID;
@@ -75,13 +73,7 @@ public class ThongTinFragment extends Fragment {
             }
         });
 
-        idDonMua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DonMua_Activity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 

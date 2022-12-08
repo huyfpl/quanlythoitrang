@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <EditText
@@ -83,9 +84,9 @@
                 android:alpha="0.5"
                 android:background="@drawable/bg_bogoc_gray"
                 android:cursorVisible="true"
-                android:text="Huỷ"
+                android:text="Hủy"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/user_btnok"
@@ -97,7 +98,7 @@
                 android:background="@drawable/bg_bogoc_yellow"
                 android:text="OK"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 

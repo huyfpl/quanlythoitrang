@@ -64,7 +64,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             return;
         }
 
-
         TbSanPhamDao sanPhamDao = new TbSanPhamDao();
         TbGioHangDao tbGioHangDao = new TbGioHangDao();
 
